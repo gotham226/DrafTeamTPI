@@ -1,0 +1,16 @@
+{
+    "autoload": {
+        "psr-4": {
+            "drafteam\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Martin Gabriel",
+            "email": "gabriel-henri.mrtn@eduge.ch"
+        }
+    ],
+    "require": {
+        "pecee/simple-router": "^5.1"
+    }
+}
