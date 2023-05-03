@@ -5,7 +5,7 @@
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,7 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@400;500;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/style.css" />
-    <title>Draft Team</title>
+    <title>DraFTeam</title>
 </head>
 
 <body onload="GetWindowHeight();" id="collections" onresize="GetWindowHeight()">
@@ -35,7 +35,10 @@
 
     <div id="pageAccueil">
         <?php
-            if(isset($_SESSION['entraineur']) == true ){
+        
+            if(isset($_SESSION['entraineur']) == true && isset($_SESSION['idEquipe']) != null){
+                
+
         ?>
         <div id="btnCreation" style="display: flex;justify-content: space-around;width: 100%;z-index: 200000;position: absolute;align-items: flex-end; ">
             <button id="newEvent" name="collections" class="btn bg-purple" style="position: fixed;z-index: 100000;"
@@ -49,16 +52,20 @@
             <img src="./assets/img/LogoNormal.png" alt="logo" id="LogoPrincipal">
 
         </div>
-        
-       <section>
-            <h1 style="margin-top:5%;"class="bold size4 ta-center">Créer ton équipe coach !</h1>
-            <h1 style=" margin-top:1%;" class="spacebottom3 halfwhite size2 ta-center"> Rejoins ou crée un championnat pour pouvoir créer ton équipe</h1>
-            <img src="./assets/img/icone_coach@3x.png" style="width:10%; margin-left:45%;"alt="">
-            <br>
-            <button style="width:20%; margin-left: 40%;margin-top:2%;" onclick="location.href='/creationChampionnat'"  class="btn bg-purple wallet">Créer un championnat</button>
-            <button style="width:20%; margin-left: 40%;margin-top:1%;" onclick="location.href='/creationEquipe'"  class="btn bg-purple wallet">Créer une équipe</button>
-       </section>
-
+        <?php
+        if(isset($_SESSION['entraineur']) == true && $_SESSION['idEquipe'] == null){
+        ?>
+            <section>
+                    <h1 style="margin-top:5%;"class="bold size4 ta-center">Créer ton équipe coach !</h1>
+                    <h1 style=" margin-top:1%;" class="spacebottom3 halfwhite size2 ta-center"> Rejoins ou crée un championnat pour pouvoir créer ton équipe</h1>
+                    <img src="./assets/img/icone_coach@3x.png" style="width:10%; margin-left:45%;"alt="">
+                    <br>
+                    <button style="width:20%; margin-left: 40%;margin-top:2%;" onclick="location.href='/creationChampionnat'"  class="btn bg-purple wallet">Créer un championnat</button>
+                    <button style="width:20%; margin-left: 40%;margin-top:1%;" onclick="location.href='/creationEquipe'"  class="btn bg-purple wallet">Créer une équipe</button>
+            </section>
+        <?php
+        }
+        ?>
         
         <!-- Evenement a venir -->
         <?php
@@ -120,7 +127,7 @@
             }else{
                 ?>
                 
-                <h1 style="margin-top:5%;" class="bold size4 ta-center">Bienvenue sur DrafTeam !</h1>
+                <h1 style="margin-top:5%;" class="bold size4 ta-center">Bienvenue sur DraFTeam !</h1>
 
                     <ul style="margin-left:35%; list-style:none; display: inline-flex; width:60%; margin-top:5%;">
                         <li style="width:25%;"><h1 style=" margin-top:1%;" class="spacebottom3 halfwhite size2 ta-center">Tu es joueur ou staff ? <br> Connectes-toi avec les informations que ton entraîneur t'a transmis.</h1></li>
@@ -218,6 +225,8 @@
 
             <div class="infoProfil ">
                 <?php
+                
+                
                     if(isset($_SESSION['photoProfil']) !=""){
                     ?>
                         <img id="ppUtil" class="photoProfil " src="./assets/image/<?=$_SESSION['photoProfil']?>">
@@ -230,8 +239,15 @@
                 ?>
                 
                 <h2 id="nomUtilisateurProfil">Nom de l'utilisateur</h2>
+                <?php
+                if(isset($_SESSION['email']) != null){
+
                 
+                ?>
                 <p class="editeProfile"><a style="color: white;"href="/modifierProfil"> Éditer le profil</a></p>
+                <?php
+                }
+                ?>
             </div>
 
         </div>

@@ -10,6 +10,9 @@ class AgendaController
 {
     public function agenda()
     {
+        if(!isset($_SESSION['email'])){
+            header('Location: /');
+        }
         require_once('../src/Views/agenda.php');
     }
 

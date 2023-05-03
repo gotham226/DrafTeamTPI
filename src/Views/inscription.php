@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -34,7 +34,7 @@
 
     <div id="creationProfil">
         <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 10%;">Inscription d'entraîneur</h1>
-        <h2 style="color:red;"><?=$error?></h2>
+        <h2 style="color:red; text-align: center;"><?=$error?></h2>
         <form  method="post" style="margin: auto;" enctype="multipart/form-data">
 
             <label style="font-size: 20px; font-weight: bold;">Votre nom</label>
@@ -46,7 +46,7 @@
             <br><br>
 
             <label style="font-size: 20px; font-weight: bold;">Votre email</label>
-            <input type="email" name="email" placeholder="Email">
+            <input type="email" name="email" placeholder="drafteam@mail.com">
             <br><br>
             
             <label style="font-size: 20px; font-weight: bold;">Numéro de téléphone</label>

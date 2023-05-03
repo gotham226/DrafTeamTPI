@@ -10,27 +10,34 @@ class CreationChampionnatController
 {
     public function creationChampionnat()
     {
+        if(!isset($_SESSION['entraineur'])){
+
+            header('Location: /');
+            exit;
+        }
+        
         $nomChampionnat = filter_input(INPUT_POST, 'nomChampionnat', FILTER_SANITIZE_STRING);
-        $actif = filter_input(INPUT_POST, 'actif', FILTER_SANITIZE_STRING);
 
         $error="";
 
         if(isset($_POST['creerChampionnat']))
         {
-            if($nomChampionnat != "" && $actif != "")
+            if($nomChampionnat != "")
             {
-                if($actif == "oui"){
-                    ChampionnatModel::setAllChampionnatInnactiv();
-                    // ChampionnatModel::unregisterInactiveChampionnat();
-                    $isActif=1;
-                }else{
-                    $isActif=0;
-                }
                 $saison = date("Y");
-                ChampionnatModel::creerNouveauChampionnat($nomChampionnat, $saison,$_SESSION['idSportif'] , $isActif);
+                ChampionnatModel::creerNouveauChampionnat($nomChampionnat, $saison,$_SESSION['idSportif'] , 0);
+                if($_SESSION['idEquipe']== null)
+                {
+                    header('Location: /creationEquipe');
+                    exit;
+                }
+                else{
+                    header('Location: /championnat');
+                    exit;
+                }
 
             }else{
-                $error = "Tous les champs ne sont pas rensigné.";
+                $error = "Tous les champs ne sont pas rensignés.";
             }
         }
 

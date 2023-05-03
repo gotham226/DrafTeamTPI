@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -40,18 +40,6 @@
             <label style="font-size: 20px; font-weight: bold;">Nom du championnat</label>
             <input type="text" name="nomChampionnat" placeholder="Championnat">
             <br><br>
-
-            <label style="font-size: 20px; font-weight: bold;">Mettre actif ce championnat ?</label>
-            <label style="font-size: 13px;">Seul un championnat peut être actif à la fois, si vous avez déjà un championnat actif et que vous choisissez d'activer celui que vous créer, l'aure championnat seras innactif.</label>
-            <select name="actif" style="height:55px; border-radius: 7px;">
-                <option value="oui">Oui</option>
-                <option value="non">Non</option>
-            </select>
-            <br><br>
-
-            
-            
-            
             <button type="submit" class="btn bg-purple size2 white" name="creerChampionnat">Créer le championnat</button>
         </form>
     </div>

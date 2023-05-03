@@ -80,6 +80,9 @@ class InscriptionController
                             //* hash le mot de passe en BCRYPT 
                             $hashPassword = password_hash($mdp1, PASSWORD_BCRYPT, $options);
 
+                            $nomImageProfil = str_replace(' ', '', $nomImageProfil);
+                            $nomImageBaniere = str_replace(' ', '', $nomImageBaniere);
+
                             if($canUploadProfil == true && $canUploadBaniere == true){
                                 if(move_uploaded_file($_FILES['profil']['tmp_name'], "$uploads_dir/$nomImageProfil") && move_uploaded_file($_FILES['baniere']['tmp_name'], "$uploads_dir/$nomImageBaniere"))
                                 {
@@ -90,7 +93,9 @@ class InscriptionController
                                         $_SESSION['entraineur'] = true;
                                         $_SESSION['photoProfil'] = $nomImageProfil;
                                         $_SESSION['photoBaniere'] = $nomImageBaniere;
-                                        $_SESSION['idSportif'] = UserModel::takeIdByEmail($email)['idSportif'];
+                                        $_SESSION['idSportif'] = UserModel::takeUserByEmail($email)['idSportif'];
+                                        $_SESSION['idEquipe'] = UserModel::takeUserByEmail($email)['idEquipe'];
+                                        
                                         header('Location: /');
                                         exit;
                                     }                                   

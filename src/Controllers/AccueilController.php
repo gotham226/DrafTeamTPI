@@ -10,7 +10,6 @@ class AccueilController
     public function accueil()
     {
         
-
         require_once('../src/Views/accueil.php');
     }
 }

@@ -13,6 +13,7 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@400;500;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Draft Team</title>
 </head>
 
@@ -31,29 +32,25 @@
     
    
 
-    <div id="modifierProfil">
-        <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 6%;">Modifier le <span
-                class="lightpurple">Profil</span></h1>
-        <form action="#" method="post" style="margin: auto;">
-            <input type="text" id="nomUtilModif" placeholder="Ajoutez votre pseudo">
-            <input type="email" id="emailUtilModif" placeholder="Ton email">
-            <textarea id="descriptionProjetModif" rows="4"
-                placeholder="Ajoutez un Description a votre projet"></textarea>
-            <label>Modifier votre photo de profil</label>
-            <input type="file" accept="image/png, image/jpeg, image/jpg" id="outputPhotoProfilModif"
-                onchange="LoadPhotoProfil(event)">
-            <div id="imgUploadPhotoProfil"
-                style="width: 5vw;height: 5vw; background-size: cover;background-position: center; border-radius: 100%;">
-            </div>
-            <label>Modifier votre bannière</label>
-            <input type="file" accept="image/png, image/jpeg, image/jpg" id="outputBanniereModif"
-                onchange="LoadBanniere(event)">
-            <div id="imgUploadBanniere" alt="" style="width: 20vw;height: 7vw;">
-                <br>
-            </div>
-            <button type="submit"  class="btn bg-purple size2 white"
-                onclick="ModifierProfil(); DisplayAccueil()">Modifier</button>
+    <div>
+        
+        
+            
+        <h1 class="size5 bold spacebottom1" style="text-align: center; margin-top:7%;">Veux-tu vraiment le supprimer ?</h1>
+        <form method="post" style="width: 100%; max-width: 100%;">
+            <ul style="display: inline-flex; list-style: none; width: 100%;margin-top: 5%;">
+                <li style="margin-left:42%;width: 10%;">
+                    <button name="oui" style="width: 50%;" type="submit" onclick="location.href='/connexion'"  class="btn bg-purple wallet">Oui</button> 
+                </li>
+
+                <li style=" width: 10%;">
+                    <button style="width: 50%;" name="annuler" type="submit" class="btn bg-purple wallet">Annuler</button> 
+                </li>
+            </ul>
         </form>
+        
+
+        
     </div>
     <!-- footer section starts -->
     <footer class="spacer10">

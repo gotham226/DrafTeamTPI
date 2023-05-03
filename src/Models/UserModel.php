@@ -21,8 +21,6 @@ class UserModel
     {
         $sql = "INSERT INTO sportif(nom, prenom, dateNaissance, photo, email, motDePasse, telephone, idPoste, baniere) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         
-        
-
         $data = [            
             $nom,             
             $prenom,            
@@ -38,14 +36,47 @@ class UserModel
         return database::dbRun($sql, $data);
     }
 
-    public static function takeIdByEmail($email)
+    public static function takeUserByEmail($email)
     {
-        $sql = "SELECT idSportif FROM sportif WHERE email = ?";
+        $sql = "SELECT * FROM sportif WHERE email = ?";
         $data = [
             $email
         ];
         
         return database::dbRun($sql, $data)->fetch(PDO::FETCH_ASSOC);
     }
+
+    public static function connexionCheck($email)
+    {
+        $sql = "SELECT * FROM sportif WHERE email = ?";
+        $data = [
+            $email
+        ];
+        return database::dbRun($sql, $data)->fetch(PDO::FETCH_ASSOC);
+    }
     
+    public static function UpdateTeamForAUser($idSportif, $idEquipe)
+    {
+        $sql = "UPDATE sportif SET idEquipe = ? WHERE idSportif = ?";
+
+        $data=[
+            $idEquipe,
+            $idSportif
+        ];
+        
+        return database::dbRun($sql, $data);
+    }
+
+    public static function deleteAllUserWithoutTeam()
+    {
+        $sql = "DELETE FROM sportif WHERE idEquipe = ? AND idPoste !=?";
+
+        $data=[
+            null,
+            1
+        ];
+        
+        return database::dbRun($sql, $data);
+    }
+
 }

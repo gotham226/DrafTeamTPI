@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="64x64" href="./assets/img/iconeDT.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="img/iconeDT.png">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
     <!-- google font link -->
@@ -25,34 +25,37 @@
         require_once('inc/nav.php');
         ?>
 
-
     </header>
       <!-- header section Fin -->
     
    
 
-    <div id="modifierProfil">
-        <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 6%;">Modifier le <span
-                class="lightpurple">Profil</span></h1>
-        <form action="#" method="post" style="margin: auto;">
-            <input type="text" id="nomUtilModif" placeholder="Ajoutez votre pseudo">
-            <input type="email" id="emailUtilModif" placeholder="Ton email">
-            <textarea id="descriptionProjetModif" rows="4"
-                placeholder="Ajoutez un Description a votre projet"></textarea>
-            <label>Modifier votre photo de profil</label>
-            <input type="file" accept="image/png, image/jpeg, image/jpg" id="outputPhotoProfilModif"
+    <div id="creationProfil">
+        <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 10%;">Création de championnat</h1>
+        <h2 style="color:red;"><?=$error?></h2>
+        <form  method="post" style="margin: auto;" enctype="multipart/form-data">
+            <label style="font-size: 20px; font-weight: bold;">Nom de l'équipe</label>
+            <input type="text" name="nomEquipe" placeholder="Equipe">
+            <br><br>
+            <label style="font-size: 20px; font-weight: bold;">Ecusson</label>
+            <input type="file" name="ecusson" accept="image/png, image/jpeg, image/jpg" id="outputPhotoProfil"
                 onchange="LoadPhotoProfil(event)">
             <div id="imgUploadPhotoProfil"
                 style="width: 5vw;height: 5vw; background-size: cover;background-position: center; border-radius: 100%;">
             </div>
-            <label>Modifier votre bannière</label>
-            <input type="file" accept="image/png, image/jpeg, image/jpg" id="outputBanniereModif"
-                onchange="LoadBanniere(event)">
-            <div id="imgUploadBanniere" alt="" style="width: 20vw;height: 7vw;">
-                <br>
-            </div>
-            <button type="submit"  class="btn bg-purple size2 white"
-                onclick="ModifierProfil(); DisplayAccueil()">Modifier</button>
+            <label style="font-size: 20px; font-weight: bold;">Lieu du stade</label>
+            <select name="lieu" style="border-radius: 8px;">
+            <?php
+            foreach ($lieus as $lieu) {
+                ?>
+                <option style="color: black;" value="<?=$lieu['idLieu'];?>"><?=$lieu['nomLieu']?></option>
+                <?php
+            }
+            ?>
+                
+            </select>
+            <br><br>
+            <button type="submit" class="btn bg-purple size2 white" name="creerEquipe">Créer l'équipe</button>
         </form>
     </div>
     <!-- footer section starts -->

@@ -8,9 +8,15 @@
             <?php
                 if(isset($_SESSION['email']) !="")
                 {
-                ?>
-                    <a href="#featured" class="liensMenu">Equipe</a>
+                    if(isset($_SESSION['idEquipe']) != null){
+                        ?>
+                            <a href="/monEquipe" class="liensMenu">Equipe</a>
+                        <?php
+                    }
+                ?>  
+                    
                     <a href="/agenda" class="liensMenu">Agenda</a>
+                    <a href="/championnat" class="liensMenu">Championnat</a>
                     <button id="seConnecter" onclick="location.href='/deconnexion'"  class="btn bg-purple wallet">Se déconnecter</button> 
                 <?php
                 }else{
