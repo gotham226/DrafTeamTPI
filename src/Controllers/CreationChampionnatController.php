@@ -25,7 +25,7 @@ class CreationChampionnatController
             if($nomChampionnat != "")
             {
                 $saison = date("Y");
-                ChampionnatModel::creerNouveauChampionnat($nomChampionnat, $saison,$_SESSION['idSportif'] , 0);
+                ChampionnatModel::creerNouveauChampionnat($nomChampionnat, $saison,$_SESSION['idSportif']);
                 if($_SESSION['idEquipe']== null)
                 {
                     header('Location: /creationEquipe');

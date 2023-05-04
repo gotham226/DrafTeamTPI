@@ -41,6 +41,33 @@ class EquipeModel
     
         database::dbRun($sql, $data); 
     }
+
+    public static function updateTeam($nomEquipe, $ecusson, $idLieu)
+    {
+        $sql = "UPDATE equipe SET nomEquipe = ?, ecusson = ?, idLieu = ? WHERE idEquipe = ?";
+
+        $data=[
+            $nomEquipe,
+            $ecusson,
+            $idLieu,
+            $_SESSION['idEquipe']
+        ];
+        
+        return database::dbRun($sql, $data);
+    }
+
+    public static function updateTeamWithoutImage($nomEquipe, $idLieu)
+    {
+        $sql = "UPDATE equipe SET nomEquipe = ?, idLieu = ? WHERE idEquipe = ?";
+
+        $data=[
+            $nomEquipe,
+            $idLieu,
+            $_SESSION['idEquipe']
+        ];
+        
+        return database::dbRun($sql, $data);
+    }
     
         
     

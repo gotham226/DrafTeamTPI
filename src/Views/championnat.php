@@ -35,7 +35,46 @@
     <div>
         
         <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 6%; margin-bottom: 3%;">Gestion championnats</h1>
+        
+        <?php if($idChampionnatActif != null){?>
+            <h1 style=" margin-top:1%;" class="spacebottom3 halfwhite size2 ta-center">Championnat actif </h1>
+            <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 20%;">
+                    <br>
+                    <br>
+                    <?php
+                    if(isset($_SESSION['entraineur']))
+                    {
+                        
+                            
+                        ?>
+
+                            <ul style="display: inline-flex; list-style: none; width:100%; ">
+                                <li style="margin-left: 5%;"><button  onclick="location.href='/desactiver?idChampionnatActif='$idChampionnatActif" style="color: black;" class="btn">Désactiver</button></li>
+                                <li style="margin-left: 6%;"><h2 style="text-align: center;"><?php echo $championnatsActif['nomChampionnat']." ". $championnatsActif['saison']."/". $championnatsActif['saison']+1?></h2></li>
+                            </ul>
+                            <br>
+                            <div class="text-center"> <a href="modifierChampionnat?idChampionnat=<?=$idChampionnatActif?>" style="color: white;"> <button  style=" color: blue; background-color: #0a78df00; border: none;" class="material-icons button edit">edit</button> </a>
+                            <a href="deleteChampionnat?idChampionnat=<?=$idChampionnatActif?>"> <button  style=" color: red; background-color: #0a78df00; border: none;"  class="material-icons button delete">delete</button> </a>
+                            
+                            </div>
+                        <?php
+                        ?>
+                            
+                        <?php
+                        }else{
+                        ?>
+                            <h2 style="text-align: center;"><?php echo $championnatsActif['nomChampionnat']." ". $championnatsActif['saison']."/". $championnatsActif['saison']+1?></h2>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                    <br></br>
+            
+            </div>
+            <br></br>
+            <br></br>
         <?php
+        }
         if(isset($_SESSION['entraineur']))
         {
         ?>
@@ -56,14 +95,16 @@
         {
             $idChampionnat = $championnat['idChampionnat'];
             $nomChampionnat = $championnat['nomChampionnat'];
-            $saison = $championnat['saison']."/".$championnat['saison']+1
+            $saison = $championnat['saison']."/".$championnat['saison']+1;
 
+            if($idChampionnatActif != $idChampionnat){
         ?>
             
             <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 20%;">
                 <br>
                 <br>
                 <?php
+                
                 if(isset($_SESSION['entraineur']))
                 {
                     if(isset($_SESSION['idEquipe'])!=null){
@@ -103,6 +144,7 @@
                 <br></br>
 
             <?php
+                }   
             }
             ?>
         

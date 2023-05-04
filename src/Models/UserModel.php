@@ -17,7 +17,7 @@ class UserModel
         return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function registerUser($nom, $prenom, $email, $mdp, $numTel, $dateNaissance, $photoProfil, $photoBaniere, $idPost)
+    public static function registerUser($nom, $prenom, $email, $mdp, $numTel, $dateNaissance, $photoProfil, $photoBaniere, $idPost, $idEquipe)
     {
         $sql = "INSERT INTO sportif(nom, prenom, dateNaissance, photo, email, motDePasse, telephone, idPoste, baniere) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         
@@ -78,5 +78,50 @@ class UserModel
         
         return database::dbRun($sql, $data);
     }
+
+    public static function takeTheCoach($idEquipe)
+    {
+        $sql = "SELECT * FROM sportif WHERE idPoste = ? AND idEquipe = ?";
+        $data = [
+            1,
+            $idEquipe
+        ];
+        return database::dbRun($sql, $data)->fetch(PDO::FETCH_ASSOC);
+    }
+    
+
+    public static function takePlayerByIdEquipe($idEquipe)
+    {
+        $sql = "SELECT * FROM sportif s INNER JOIN poste p ON s.idPoste = p.idPoste WHERE p.admin = 0 AND p.staff = 0 AND s.idEquipe = ?";
+        $data = [
+            $idEquipe
+        ];
+        return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function takeStaffByIdEquipe($idEquipe)
+    {
+        $sql = "SELECT * FROM sportif s 
+        INNER JOIN poste p ON s.idPoste = p.idPoste 
+        WHERE p.admin = 0 AND p.staff = 1 
+        AND s.idEquipe = ?";
+        $data = [
+            $idEquipe
+        ];
+        return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function deleteUserById($idSportif)
+    {
+        $sql = "DELETE FROM sportif WHERE idSportif = ?";
+
+        $data=[
+            $idSportif
+        ];
+        
+        return database::dbRun($sql, $data);
+    }
+
+
 
 }

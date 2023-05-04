@@ -40,7 +40,7 @@
         <form method="post" style="width: 100%; max-width: 100%;">
             <ul style="display: inline-flex; list-style: none; width: 100%;margin-top: 5%;">
                 <li style="margin-left:42%;width: 10%;">
-                    <button name="oui" style="width: 50%;" type="submit" onclick="location.href='/connexion'"  class="btn bg-purple wallet">Oui</button> 
+                    <button name="oui" style="width: 50%;" type="submit"   class="btn bg-purple wallet">Oui</button> 
                 </li>
 
                 <li style=" width: 10%;">

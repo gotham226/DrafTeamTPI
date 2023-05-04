@@ -34,7 +34,7 @@
 
     <div id="creationProfil">
         <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 10%;">Création de championnat</h1>
-        <h2 style="color:red;"><?=$error?></h2>
+        <h2 style="color:red; text-align: center;"><?=$error?></h2>
         <form  method="post" style="margin: auto;" enctype="multipart/form-data">
 
             <label style="font-size: 20px; font-weight: bold;">Nom du championnat</label>

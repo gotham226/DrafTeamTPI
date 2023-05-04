@@ -2,15 +2,15 @@
 
 namespace drafteam\Controllers;
 
-use drafteam\Models\EquipeModel;
+
 use drafteam\Models\UserModel;
 
 
 session_start();
 
-class DeleteEquipeController
+class DeleteSportifController
 {
-    public function deleteEquipe()
+    public function deleteUser()
     {
         if(!isset($_SESSION['entraineur'])){
             header('Location: /');
@@ -25,17 +25,14 @@ class DeleteEquipeController
 
         if(isset($_POST['oui']))
         {
-            EquipeModel::deleteTeamById($_GET['idEquipe']);
-            UserModel::deleteAllUserWithoutTeam();
-            $_GET['idEquipe'] = null;
-            $_SESSION['idEquipe'] = null;
+            UserModel::deleteUserById($idSportif);
 
-            header('Location: /');
+            header('Location: /equipe');
             exit;
         }
 
         
-        require_once('../src/Views/deleteEquipe.php');
+        require_once('../src/Views/deleteSportif.php');
     }
 
     

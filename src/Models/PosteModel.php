@@ -5,17 +5,15 @@ use drafteam\Models\database;
 
 use PDO;
 
-class LieuModel
+class PosteModel
 {
-    public static function selectAllLocation()
+    public static function selectAllPoste()
     {
-        $sql = "SELECT * FROM lieu";
+        $sql = "SELECT * FROM poste WHERE poste != ?";
         $data = [
-            
+            'Entraîneur'
         ];
         
         return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    
 }

@@ -3,6 +3,8 @@
 namespace drafteam\Controllers;
 
 use drafteam\Models\EquipeModel;
+use drafteam\Models\UserModel;
+use drafteam\Models\LieuModel;
 
 session_start();
 
@@ -22,6 +24,15 @@ class EquipeController
         }
         
         $monEquipe = EquipeModel::selectATeamById($_SESSION['idEquipe']);
+
+        $monCoach = UserModel::takeTheCoach($_SESSION['idEquipe']);
+
+        $mesJoueurs = UserModel::takePlayerByIdEquipe($_SESSION['idEquipe']);
+
+        $monStaff = UserModel::takeStaffByIdEquipe($_SESSION['idEquipe']);
+
+
+        
 
         
 

@@ -29,7 +29,7 @@ class InscriptionController
                 // Test si tout les champs sont renseigner
                 if($nom != "" && $prenom != "" && $email != "" && $numTel != "" && $dateNaissance != "" && $mdp1 != "" && $mdp2 != "" ){
                     
-                    var_dump(UserModel::checkIfEmailExist($email));
+                    
                     // Test si l'email est déjà utilisé
                     if(UserModel::checkIfEmailExist($email) != ""){
 
@@ -86,7 +86,7 @@ class InscriptionController
                             if($canUploadProfil == true && $canUploadBaniere == true){
                                 if(move_uploaded_file($_FILES['profil']['tmp_name'], "$uploads_dir/$nomImageProfil") && move_uploaded_file($_FILES['baniere']['tmp_name'], "$uploads_dir/$nomImageBaniere"))
                                 {
-                                    if(UserModel::registerUser($nom, $prenom, $email, $hashPassword, $numTel, $dateNaissance, $nomImageProfil, $nomImageBaniere, 1)){
+                                    if(UserModel::registerUser($nom, $prenom, $email, $hashPassword, $numTel, $dateNaissance, $nomImageProfil, $nomImageBaniere, 1, null)){
                                 
                                         
                                         $_SESSION['email'] = $email;

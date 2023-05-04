@@ -30,7 +30,6 @@ class ConnexionController
                         {
                             $_SESSION['entraineur'] = true;
                             
-                            $_SESSION['idSportif'] = UserModel::takeUserByEmail($email)['idSportif'];
                             
                         }else{
                             if($user['idPoste'] == 2)
@@ -43,6 +42,7 @@ class ConnexionController
                         $_SESSION['photoProfil'] = $user['photo'];
                         $_SESSION['photoBaniere'] = $user['baniere'];
                         $_SESSION['idPoste'] = $user['idPoste'];
+                        $_SESSION['idSportif'] = UserModel::takeUserByEmail($email)['idSportif'];
                         $_SESSION['idEquipe'] = UserModel::takeUserByEmail($email)['idEquipe'];
 
                         header('Location: /');

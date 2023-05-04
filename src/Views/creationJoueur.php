@@ -31,38 +31,43 @@
    
 
     <div id="creationProfil">
-        <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 10%;">Création de championnat</h1>
+        <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 10%;">Création de compte sportif</h1>
         <h2 style="color:red; text-align: center;"><?=$error?></h2>
         <form  method="post" style="margin: auto;" enctype="multipart/form-data">
-            <label style="font-size: 20px; font-weight: bold;">Nom de l'équipe</label>
-            <input type="text" name="nomEquipe" placeholder="Equipe">
+
+            <label style="font-size: 20px; font-weight: bold;">Email</label>
+            <input type="text" name="email" placeholder="drafteam@mail.com">
             <br><br>
-            <label style="font-size: 20px; font-weight: bold;">Ecusson</label>
-            <input type="file" name="ecusson" accept="image/png, image/jpeg, image/jpg" id="outputPhotoProfil"
-                onchange="LoadPhotoProfil(event)">
-            <div id="imgUploadPhotoProfil"
-                style="width: 5vw;height: 5vw; background-size: cover;background-position: center; border-radius: 100%;">
+
+            <label style="font-size: 20px; font-weight: bold;">Mot de passe</label>
+            <div style="display: flex; align-items: center;">
+                <input type="password" name="mdp" id="mdp" value="<?=$mdpGenerer?>" style="flex: 1;">
+                <button type="button" class="bg-purple" onclick="togglePassword()" style="margin-left:-63px; height:64px; border-radius:10px; background-color:white;"><img id="eye-icon"src="./assets/img/oeil.png" style="height:100%;" alt=""></button>
             </div>
-            <label style="font-size: 20px; font-weight: bold;">Lieu du stade</label>
-            <select name="lieu" style="border-radius: 8px;">
+            <br><br>
+
+            <select name="poste" style="border-radius: 8px;">
             <?php
-            foreach ($lieus as $lieu) {
+            foreach ($postes as $poste) {
                 ?>
-                <option style="color: black;" value="<?=$lieu['idLieu'];?>"><?=$lieu['nomLieu']?></option>
+                <option style="color: black;" value="<?=$poste['idPoste'];?>"><?=$poste['poste']?></option>
                 <?php
             }
             ?>
                 
             </select>
+
             <br><br>
-            <button type="submit" class="btn bg-purple size2 white" name="creerEquipe">Créer l'équipe</button>
+
+            
+            <button type="submit" class="btn bg-purple size2 white" name="inscription">Créer sportif</button>
         </form>
     </div>
     <!-- footer section starts -->
     <footer class="spacer10">
         <div class="container row jc-between flexcol-s ta-center-s ">
             <div class="row flexcol spacebottom3-s spaceleft3-s">
-                
+
             </div>
         </div>
     </footer>
@@ -70,6 +75,19 @@
 
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <!-- custom js file link -->
+    <script>
+        function togglePassword() {
+            var x = document.getElementById("mdp");
+            var eyeIcon = document.getElementById("eye-icon");
+            if (x.type === "password") {
+                x.type = "text";
+                eyeIcon.src = "./assets/img/cacher.png";
+            } else {
+                x.type = "password";
+                eyeIcon.src = "./assets/img/oeil.png";
+            }
+        }
+    </script>
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/affichage.js"></script>
 

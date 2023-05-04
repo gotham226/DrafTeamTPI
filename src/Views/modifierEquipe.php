@@ -31,11 +31,11 @@
    
 
     <div id="creationProfil">
-        <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 10%;">Création de championnat</h1>
+        <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 10%;">Modification d'équipe</h1>
         <h2 style="color:red; text-align: center;"><?=$error?></h2>
         <form  method="post" style="margin: auto;" enctype="multipart/form-data">
             <label style="font-size: 20px; font-weight: bold;">Nom de l'équipe</label>
-            <input type="text" name="nomEquipe" placeholder="Equipe">
+            <input type="text" name="nomEquipe" value="<?=$equipe['nomEquipe']?>">
             <br><br>
             <label style="font-size: 20px; font-weight: bold;">Ecusson</label>
             <input type="file" name="ecusson" accept="image/png, image/jpeg, image/jpg" id="outputPhotoProfil"
@@ -48,14 +48,15 @@
             <?php
             foreach ($lieus as $lieu) {
                 ?>
-                <option style="color: black;" value="<?=$lieu['idLieu'];?>"><?=$lieu['nomLieu']?></option>
+                <!-- Pour séléctionner la valeur dans la base de données par défaut -->
+                <option style="color: black;" value="<?=$lieu['idLieu'];?>" <?php if($lieu['idLieu'] == $equipe['idLieu']){echo "selected";}?>><?=$lieu['nomLieu']?></option>
                 <?php
             }
             ?>
                 
             </select>
             <br><br>
-            <button type="submit" class="btn bg-purple size2 white" name="creerEquipe">Créer l'équipe</button>
+            <button type="submit" class="btn bg-purple size2 white" name="creerEquipe">Modifier l'équipe</button>
         </form>
     </div>
     <!-- footer section starts -->
