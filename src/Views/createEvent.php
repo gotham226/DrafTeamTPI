@@ -38,20 +38,55 @@
     <div style="margin-top: 10%;">
         <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 6%;">Créer votre <span
                 class="lightpurple">évènement</span></h1>
-        <form class="search-form" id="leForm">
-            <h2 id="artisteH2" style="color: rgba(255, 255, 255, 0.5); margin-bottom: 3%;">Nom équipe</h2>
-            <h1>Nom de votre oeuvre *</h1>
-            <input type="text"  class="leInput" style="width: 100%;"><br>
-            <h1>Description</h1>
-            <textarea name=""  cols="30" rows="10" class="laDescription"></textarea><br>
-            <img src="" id="imgUpload" alt=""><br>
+                <h2 style="color:red; text-align: center;"><?=$error?></h2>
+        <form  method="post" style="margin: auto;">
+
+            <label style="font-size: 20px; font-weight: bold;">Nom de l'évènement</label>
+            <input type="text" name="nomEvent" placeholder="Match">
+            <br><br>
+
+            <label style="font-size: 20px; font-weight: bold;">Description</label>
+            <textarea name="description"  cols="30" rows="10" class="laDescription"></textarea>
+            <br><br>
             
-            <input type="number" id="prix" placeholder="Prix *">
+            <label style="font-size: 20px; font-weight: bold;">Début de l'évènement</label>
+            <input type="datetime-local" name="debut" required>
+            <br><br>
+
+            <label style="font-size: 20px; font-weight: bold;">Fin de l'évènement</label>
+            <input type="datetime-local" name="fin" required>
+            <br><br>
+
+            <label style="font-size: 20px; font-weight: bold;">Type d'évènement</label>
+            <select name="type" style="border-radius: 8px;">
+            <option style="color: black; text-align:center;" value="">--> Séléctionnez le type de l'évènement <--</option>
+            <?php
+            foreach ($types as $type) {
+                ?>
+                <option style="color: black;" value="<?=$type['idType'];?>"><?=$type['type']?></option>
+                <?php
+            }
+            ?>
+                
+            </select>
+            <br><br>
+
+            <label style="font-size: 20px; font-weight: bold;">Lieu de l'évènements</label>
+            <select name="lieu" style="border-radius: 8px;">
+            <option style="color: black; text-align:center;" value="">--> Séléctionnez le lieu de votre évènement <--</option>
+            <?php
+            foreach ($lieux as $lieu) {
+                ?>
+                <option style="color: black;" value="<?=$lieu['idLieu'];?>"><?=$lieu['nomLieu']?></option>
+                <?php
+            }
+            ?>
+                
+            </select>
+            <br><br>
+            
+            <button type="submit" class="btn bg-purple size2 white" name="creer">Créer l'évènement</button>
         </form>
-        <div style="display: flex;justify-content: center;">
-            <p id="msgAlerte"></p>
-            <button href="" class="btn bg-purple size2 white">Publier</button>
-        </div>
     </div>
 
 

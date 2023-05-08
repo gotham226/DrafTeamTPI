@@ -25,8 +25,10 @@ class DeleteEquipeController
 
         if(isset($_POST['oui']))
         {
+
+            
+            UserModel::deleteUserByIdEquipe($_GET['idEquipe']);
             EquipeModel::deleteTeamById($_GET['idEquipe']);
-            UserModel::deleteAllUserWithoutTeam();
             $_GET['idEquipe'] = null;
             $_SESSION['idEquipe'] = null;
 

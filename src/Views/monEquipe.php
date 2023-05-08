@@ -1,3 +1,6 @@
+<?php
+use drafteam\Models\PosteModel;
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -71,10 +74,10 @@
                 <br>
                 
                 <br>
-                <div class="container spacer5 ta-center bg-purple" style="background-image: url('./assets/image/<?=$monCoach['baniere']?>'); width: 70%;">
+                <div class="container spacer5 ta-center bg-purple" style="background-image: url('./assets/image/<?=$monCoach['baniere']?>'); width: 70%; background-size: cover;">
                     
                     <ul style="display: inline-flex; list-style: none; width:100%;height:100%;">
-                        <li style="width:40%; margin-top: 5%;"><img style="width: 80%; height:80%; " class="photoProfil " src="./assets/image/<?=$monCoach['photo']?>"></li>
+                        <li style="width:40%; margin-top: 2%;"><img style="width: 75%; height:96%; " class="photoProfil " src="./assets/image/<?=$monCoach['photo']?>"></li>
                         <li style="width:55%; margin-left: 10%; margin-top: 5%; margin-right:5%;"><h4  style="font-size: 80%;text-align: center; color:black; border-radius: 8px; background-color:white;"><?=$monCoach['prenom']?><br><?=$monCoach['nom']?></h4></li>
                     </ul>
                     <br>
@@ -87,24 +90,32 @@
                 <h1 style="text-align:center;">Joueur</h1>
                 <br>
                 <br>
-                <a href="/creationJoueur">
-                <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 70%;">
-                    
-                    <h2 style="text-align: center;font-size: 90px;color: white;">+</h2>
-                    
-                </div>
-            </a>
-            <br>
                 <?php
+                
+                if(isset($_SESSION['entraineur']))
+                {
+                ?>
+                    <a href="/creationJoueur">
+                        <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 70%;">
+                            
+                            <h2 style="text-align: center;font-size: 90px;color: white;">+</h2>
+                            
+                        </div>
+                    </a>
+                    
+                    <br>
+                <?php
+                }
+
                 foreach ($mesJoueurs as $joueur)
                 {
                     
                 ?>
-                    <div class="container spacer5 ta-center bg-purple" style="background-image: url('./assets/<?php if($joueur['baniere'] == null){echo "img/fondBlanc.png";}else{echo "image/".$joueur['baniere'];} ?>'); width: 70%;">
+                    <div class="container spacer5 ta-center bg-purple" style="background-image: url('./assets/<?php if($joueur['baniere'] == null){echo "img/fondBlanc.png";}else{echo "image/".$joueur['baniere'];} ?>'); width: 70%; background-size: cover;">
                     
                         <ul style="display: inline-flex; list-style: none; width:100%;height:100%;">
-                            <li style="width:40%; margin-top: 5%;"><img style="width: 80%; height:80%; " class="photoProfil " src="./assets/<?php if($joueur['photo'] == null){echo "img/profileIcon.png";}else{echo "image/".$joueur['photo'];} ?>"></li>
-                            <li style="width:55%; margin-left: 10%; margin-top: 5%; margin-right:5%;"><h4  style="font-size: 70%;text-align: center; color:black; border-radius: 8px; background-color:white;"><?php if($joueur['prenom'] == null){echo $joueur['email'];}else{echo $joueur['prenom']."<br>".$joueur['nom']; }?><br><?=$joueur['nom']?></h4></li>
+                            <li style="width:40%; margin-top: 2%;"><img style="width: 75%; height:96%; " class="photoProfil " src="./assets/<?php if($joueur['photo'] == null){echo "img/profileIcon.png";}else{echo "image/".$joueur['photo'];} ?>"></li>
+                            <li style="width:45%; margin-left: 2%; margin-top: 2%; margin-right:12%;"><h4  style="font-size: 75%;text-align: center; color:black; border-radius: 8px; background-color:white; width:100%;"><?php if($joueur['prenom'] == null){echo $joueur['email'];}else{echo $joueur['prenom']."<br>".$joueur['nom']; }?><br><?php echo PosteModel::selectPosteById($joueur['idPoste'])['poste'];?></h4></li>
                             <?php
                             if(isset($_SESSION['entraineur']) == true)
                             {
@@ -130,36 +141,43 @@
                 <h1 style="text-align:center;">Staff</h1>
                 <br>
                 <br>
-                <a href="/creationJoueur">
-                <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 70%;">
-                    
-                    <h2 style="text-align: center;font-size: 90px;color: white;">+</h2>
-                    
-                </div>
-            </a>
-            <br>
                 <?php
+                if(isset($_SESSION['entraineur']))
+                {
+                ?>
+                    <a href="/creationJoueur">
+                        <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 70%; background-size: cover;">
+                            
+                            <h2 style="text-align: center;font-size: 90px;color: white;">+</h2>
+                            
+                        </div>
+                    </a>
+                    
+                    <br>
+                <br>
+                <?php
+                }
                 foreach ($monStaff as $staff)
                 {
                     
                 ?>
-                    <div class="container spacer5 ta-center bg-purple" style="background-image: url('./assets/<?php if($staff['baniere'] == null){echo "img/fondBlanc.png";}else{echo "image/".$staff['baniere'];} ?>'); width: 70%;">
+                    <div class="container spacer5 ta-center bg-purple" style="background-image: url('./assets/<?php if($staff['baniere'] == null){echo "img/fondBlanc.png";}else{echo "image/".$staff['baniere'];} ?>'); width: 70%; background-size: cover;">
                     
                         <ul style="display: inline-flex; list-style: none; width:100%;height:100%;">
-                            <li style="width:40%; margin-top: 5%;"><img style="width: 80%; height:80%; " class="photoProfil " src="./assets/<?php if($staff['photo'] == null){echo "img/profileIcon.png";}else{echo "image/".$staff['photo'];} ?>"></li>
-                            <li style="width:55%; margin-left: 10%; margin-top: 5%; margin-right:5%;"><h4  style="font-size: 70%;text-align: center; color:black; border-radius: 8px; background-color:white;"><?php if($staff['prenom'] == null){echo $staff['email'];}else{echo $staff['prenom']."<br>".$staff['nom']; }?><br><?=$staff['nom']?></h4></li>
+                            <li style="width:40%; margin-top: 2%;"><img style="width: 75%; height:96%; " class="photoProfil " src="./assets/<?php if($staff['photo'] == null){echo "img/profileIcon.png";}else{echo "image/".$staff['photo'];} ?>"></li>
+                            <li style="width:55%; margin-left: 10%; margin-top: 2%; margin-right:5%;"><h4  style="font-size: 80%;text-align: center; color:black; border-radius: 8px; background-color:white;"><?php if($staff['prenom'] == null){echo $staff['email'];}else{echo $staff['prenom']."<br>".$staff['nom']; }?><br><?php echo PosteModel::selectPosteById($staff['idPoste'])['poste'];?></h4></li>
                             <?php
                             if(isset($_SESSION['entraineur']) == true)
                             {
                             ?>
-                                <div class="text-center"> <a href="/modifierSportif?idSportif=<?=$joueur['idSportif']?>" style="color: white;"> <button  style=" color: blue; background-color: #0a78df00; border: none;" class="material-icons button edit">edit</button> </a>
-                                <a href="/deleteSportif?idSportif=<?=$joueur['idSportif']?>"> <button  style=" color: red; background-color: #0a78df00; border: none;"  class="material-icons button delete">delete</button> </a>
+                                <div class="text-center"> <a href="/modifierSportif?idSportif=<?=$staff['idSportif']?>" style="color: white;"> <button  style=" color: blue; background-color: #0a78df00; border: none;" class="material-icons button edit">edit</button> </a>
+                                <a href="/deleteSportif?idSportif=<?=$staff['idSportif']?>"> <button  style=" color: red; background-color: #0a78df00; border: none;"  class="material-icons button delete">delete</button> </a>
                                 </div>
                                 
                             <?php
                             }?>
                         </ul>
-                        
+                            
                             </div>
                             <br>
                         <?php

@@ -69,6 +69,17 @@ class EquipeModel
         return database::dbRun($sql, $data);
     }
     
-        
+    public static function selectATeamByIdChampionnat($idChampionnat){
+        $sql = "SELECT * 
+                FROM equipe e 
+                INNER JOIN participe p ON e.idEquipe = p.idEquipe 
+                INNER JOIN championnat c ON p.idChampionnat = c.idChampionnat 
+                WHERE c.idChampionnat = ? AND p.actif = 1;";
+        $data = [
+            $idChampionnat
+        ];
+        return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     
 }

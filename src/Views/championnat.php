@@ -50,7 +50,7 @@
 
                             <ul style="display: inline-flex; list-style: none; width:100%; ">
                                 <li style="margin-left: 5%;"><button  onclick="location.href='/desactiver?idChampionnatActif='$idChampionnatActif" style="color: black;" class="btn">Désactiver</button></li>
-                                <li style="margin-left: 6%;"><h2 style="text-align: center;"><?php echo $championnatsActif['nomChampionnat']." ". $championnatsActif['saison']."/". $championnatsActif['saison']+1?></h2></li>
+                                <a style="margin-left: 5%; color: white;" href="/infoChampionnat?idChampionnat=<?=$idChampionnatActif?>"><li ><h2 style="text-align: center;"><?php echo $championnatsActif['nomChampionnat']." ". $championnatsActif['saison']."/". $championnatsActif['saison']+1?></h2></li></a>
                             </ul>
                             <br>
                             <div class="text-center"> <a href="modifierChampionnat?idChampionnat=<?=$idChampionnatActif?>" style="color: white;"> <button  style=" color: blue; background-color: #0a78df00; border: none;" class="material-icons button edit">edit</button> </a>
@@ -63,7 +63,7 @@
                         <?php
                         }else{
                         ?>
-                            <h2 style="text-align: center;"><?php echo $championnatsActif['nomChampionnat']." ". $championnatsActif['saison']."/". $championnatsActif['saison']+1?></h2>
+                            <a style="margin-left: 11%; color: white;" href="/infoChampionnat?idChampionnat=<?=$idChampionnatActif?>"><h2 style="text-align: center;"><?php echo $championnatsActif['nomChampionnat']." ". $championnatsActif['saison']."/". $championnatsActif['saison']+1?></h2></a>
                         <?php
                         }
                         ?>
@@ -112,7 +112,7 @@
                     ?>
                         <ul style="display: inline-flex; list-style: none; width:100%; ">
                             <li style="margin-left: 5%;"><button  onclick="location.href='/mettreActif?idChampionnat=<?=$idChampionnat?>'" style="color: black;" class="btn">Activer</button></li>
-                            <li style="margin-left: 8%;"><h2 style="text-align: center;"><?php echo $nomChampionnat." ". $saison?></h2></li>
+                            <a style="margin-left: 11%; color: white;" href="/infoChampionnat?idChampionnat=<?=$idChampionnat?>"><li ><h2 style="text-align: center;"><?php echo $nomChampionnat." ". $saison?></h2></li></a>
                         </ul>
                         <br>
                         <div class="text-center"> <a href="modifierChampionnat?idChampionnat=<?=$idChampionnat?>" style="color: white;"> <button  style=" color: blue; background-color: #0a78df00; border: none;" class="material-icons button edit">edit</button> </a>
@@ -122,7 +122,7 @@
                     <?php
                     }else{
                         ?>
-                        <h2 style="text-align: center;"><?php echo $nomChampionnat." ". $saison?></h2>
+                        <a href="/infoChampionnat?idChampionnat=<?=$idChampionnat?>"><h2 style="text-align: center;"><?php echo $nomChampionnat." ". $saison?></h2></a>
                         <br>
                         <div class="text-center"> <a href="modifierChampionnat?idChampionnat=<?=$idChampionnat?>" style="color: white;"> <button  style=" color: blue; background-color: #0a78df00; border: none;" class="material-icons button edit">edit</button> </a>
                         <a href="deleteChampionnat?idChampionnat=<?=$idChampionnat?>"> <button  style=" color: red; background-color: #0a78df00; border: none;"  class="material-icons button delete">delete</button> </a>
@@ -136,11 +136,12 @@
                     <?php
                     }else{
                     ?>
-                        <h2 style="text-align: center;"><?php echo $nomChampionnat." ". $saison?></h2>
+                        <a href="/infoChampionnat?idChampionnat=<?=$idChampionnat?>"><h2 style="text-align: center;"><?php echo $nomChampionnat." ". $saison?></h2></a>
                     <?php
                     }
                     ?>
                 </div>
+                
                 <br></br>
 
             <?php

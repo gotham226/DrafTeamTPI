@@ -5,6 +5,7 @@ namespace drafteam\Controllers;
 use drafteam\Models\EquipeModel;
 use drafteam\Models\UserModel;
 use drafteam\Models\LieuModel;
+use drafteam\Models\PosteModel;
 
 session_start();
 
@@ -31,6 +32,7 @@ class EquipeController
 
         $monStaff = UserModel::takeStaffByIdEquipe($_SESSION['idEquipe']);
 
+        
 
         
 

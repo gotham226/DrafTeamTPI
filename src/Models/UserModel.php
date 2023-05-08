@@ -19,7 +19,7 @@ class UserModel
 
     public static function registerUser($nom, $prenom, $email, $mdp, $numTel, $dateNaissance, $photoProfil, $photoBaniere, $idPost, $idEquipe)
     {
-        $sql = "INSERT INTO sportif(nom, prenom, dateNaissance, photo, email, motDePasse, telephone, idPoste, baniere) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        $sql = "INSERT INTO sportif(nom, prenom, dateNaissance, photo, email, motDePasse, telephone, idPoste, baniere, idEquipe) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         
         $data = [            
             $nom,             
@@ -30,7 +30,8 @@ class UserModel
             $mdp,
             $numTel,
             $idPost,
-            $photoBaniere
+            $photoBaniere,
+            $idEquipe
         ];
 
         return database::dbRun($sql, $data);
@@ -72,7 +73,7 @@ class UserModel
         $sql = "DELETE FROM sportif WHERE idEquipe = ? AND idPoste !=?";
 
         $data=[
-            null,
+            NULL,
             1
         ];
         
@@ -122,6 +123,65 @@ class UserModel
         return database::dbRun($sql, $data);
     }
 
+    public static function selectUserById($idSportif)
+    {
+        $sql = "SELECT * FROM sportif WHERE idSportif = ?";
+        $data = [
+            $idSportif
+        ];
+        return database::dbRun($sql, $data)->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function UpdatePosteForAUser($idSportif, $idPoste)
+    {
+        $sql = "UPDATE sportif SET idPoste = ? WHERE idSportif = ?";
+
+        $data=[
+            $idPoste,
+            $idSportif
+        ];
+        
+        return database::dbRun($sql, $data);
+    }
+
+    public static function takeAllPeopleByIdEquipe($idEquipe)
+    {
+        $sql = "SELECT * FROM sportif WHERE idEquipe = ?";
+        $data = [
+            $idEquipe
+        ];
+        return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function updateUser($idSportif, $nom, $prenom, $dateNaissance, $numTel, $email, $nomprofil, $nomBaniere)
+    {
+        $sql = "UPDATE sportif SET nom = ?, prenom = ?, dateNaissance = ?, telephone = ?, email = ?, photo = ?, baniere = ?  WHERE idSportif = ?";
+
+        $data=[
+            $nom,
+            $prenom,
+            $dateNaissance,
+            $numTel,
+            $email,
+            $nomprofil,
+            $nomBaniere,
+            $idSportif
+        ];
+        
+        return database::dbRun($sql, $data);
+    }
+
+    public static function deleteUserByIdEquipe($idEquipe)
+    {
+        $sql = "DELETE FROM sportif WHERE idEquipe = ? AND idPoste != ?";
+
+        $data=[
+            $idEquipe,
+            1
+        ];
+        
+        return database::dbRun($sql, $data);
+    }
 
 
 }

@@ -12,11 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@400;500;700&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/agenda.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script>
-    <script src="./assets/js/agenda.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Draft Team</title>
 </head>
 
@@ -25,24 +21,45 @@
     
     <a name="top"></a>
     <header class="header bg-white10 shadow">
-
-       <?php
+        <?php
         require_once('inc/nav.php');
         ?>
 
+
     </header>
       <!-- header section Fin -->
-      
-   
-    <div style="width: 80%; margin-left:10%; margin-bottom: 10%;height: 70%;">
-        <div id='calendar' style="margin-top:7%; height:100%;">
-        
-        </div>
-
-    </div>
-    <p id="message"></p>
-    <!-- footer section starts -->
     
+   
+
+    <div id="creationProfil">
+        <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 6%;"><?=$championnat['nomChampionnat']." ".$championnat['saison']."/".$championnat['saison']+1?></h1>
+        <?php
+        foreach ($equipes as $equipe) 
+        {
+        ?>
+            <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 20%;">
+                <ul style="width: 100%;display: -webkit-box;align-items: flex-start;height: 95%;list-style:none; margin-left:1%; ">
+                    <li style="height:92% margin-top:4%;"><img style=" height:100%; width:100%;" id="ppUtil" class="photoProfil " src="./assets/image/<?=$equipe['ecusson']?>"></li>
+                    <li style="width:65%; margin-top:8%; margin-bottom: 4%;"><h1><?=$equipe['nomEquipe']?></h1></li>
+                </ul>
+            </div>
+
+            <br></br>
+        <?php
+        }
+        
+        
+        ?>
+        
+    </div>
+    <!-- footer section starts -->
+    <footer class="spacer10">
+        <div class="container row jc-between flexcol-s ta-center-s ">
+            <div class="row flexcol spacebottom3-s spaceleft3-s">
+                
+            </div>
+        </div>
+    </footer>
     <!-- footer section ends -->
 
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>

@@ -21,6 +21,8 @@ use drafteam\Controllers\MettreActifController;
 use drafteam\Controllers\ModifierEquipeController;
 use drafteam\Controllers\CreationJoueurController;
 use drafteam\Controllers\DeleteSportifController;
+use drafteam\Controllers\ModifierSportifController;
+use drafteam\Controllers\InfoChampionnatController;
 
 
 
@@ -44,3 +46,5 @@ Router::form('/mettreActif', [MettreActifController::class, 'mettreActif']);
 Router::form('/modifierEquipe', [ModifierEquipeController::class, 'modifierEquipe']);
 Router::form('/creationJoueur', [CreationJoueurController::class, 'creationJoueur']);
 Router::form('/deleteSportif', [DeleteSportifController::class, 'deleteUser']);
+Router::form('/modifierSportif', [ModifierSportifController::class, 'modifierSportif']);
+Router::form('/infoChampionnat', [InfoChampionnatController::class, 'infoChampionnat']);

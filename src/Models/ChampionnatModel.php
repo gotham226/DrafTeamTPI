@@ -36,8 +36,11 @@ class ChampionnatModel
         database::dbRun($sql, $data);
 
         $idChampionnat = database::Db()->lastInsertId();
-
-        ChampionnatModel::participeChampionnat($idChampionnat, $_SESSION['idEquipe']);
+        if(isset($_SESSION['idEquipe']))
+        {
+            ChampionnatModel::participeChampionnat($idChampionnat, $_SESSION['idEquipe']);
+        }
+        
     }
 
     public static function setAllChampionnatInnactiv()

@@ -31,32 +31,23 @@
    
 
     <div id="creationProfil">
-        <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 10%;">Modification d'équipe</h1>
+        <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 10%;">Modification de <span style="color: #C7BCE6"> <?=$sportif['email']?> </span></h1>
         <h2 style="color:red; text-align: center;"><?=$error?></h2>
         <form  method="post" style="margin: auto;" enctype="multipart/form-data">
-            <label style="font-size: 20px; font-weight: bold;">Nom de l'équipe</label>
-            <input type="text" name="nomEquipe" value="<?=$equipe['nomEquipe']?>">
-            <br><br>
-            <label style="font-size: 20px; font-weight: bold;">Ecusson</label>
-            <input type="file" name="ecusson" accept="image/png, image/jpeg, image/jpg" id="outputPhotoProfil"
-                onchange="LoadPhotoProfil(event)">
-            <div id="imgUploadPhotoProfil"
-                style="width: 5vw;height: 5vw; background-size: cover;background-position: center; border-radius: 100%;">
-            </div>
-            <label style="font-size: 20px; font-weight: bold;">Lieu du stade</label>
-            <select name="lieu" style="border-radius: 8px;">
+            <label style="font-size: 20px; font-weight: bold;">Rôle</label>
+            <select name="poste" style="border-radius: 8px;">
             <?php
-            foreach ($lieus as $lieu) {
+            foreach ($postes as $poste) {
                 ?>
                 <!-- Pour séléctionner la valeur dans la base de données par défaut -->
-                <option style="color: black;" value="<?=$lieu['idLieu'];?>" <?php if($lieu['idLieu'] == $equipe['idLieu']){echo "selected";}?>><?=$lieu['nomLieu']?></option>
+                <option style="color: black;" value="<?=$poste['idPoste'];?>" <?php if($poste['idPoste'] == $sportif['idPoste']){echo "selected";}?>><?=$poste['poste']?></option>
                 <?php
             }
             ?>
                 
             </select>
-            <br><br>
-            <button type="submit" class="btn bg-purple size2 white" name="modifierEquipe">Modifier l'équipe</button>
+            <br></br>
+            <button type="submit" class="btn bg-purple size2 white" name="modifierSportif">Modifier le sportif</button>
         </form>
     </div>
     <!-- footer section starts -->

@@ -33,7 +33,7 @@ class ModifierEquipeController
         $idLieu = filter_input(INPUT_POST, 'lieu', FILTER_SANITIZE_STRING);
 
 
-        if(isset($_POST['creerEquipe']))
+        if(isset($_POST['modifierEquipe']))
         {
             if($idLieu != "" && $nomEquipe != "")
             {

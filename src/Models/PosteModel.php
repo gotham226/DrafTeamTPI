@@ -16,4 +16,14 @@ class PosteModel
         
         return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function selectPosteById($idPoste)
+    {
+        $sql = "SELECT poste FROM poste WHERE idPoste = ?";
+        $data = [
+            $idPoste
+        ];
+        
+        return database::dbRun($sql, $data)->fetch(PDO::FETCH_ASSOC);
+    }
 }

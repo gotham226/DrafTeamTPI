@@ -4,6 +4,7 @@ namespace drafteam\Controllers;
 use drafteam\Models\EquipeModel;
 use drafteam\Models\UserModel;
 use drafteam\Models\LieuModel;
+use drafteam\Models\ChampionnatModel;
 
 session_start();
 
@@ -64,7 +65,14 @@ class CreationEquipeController
                             {
                                 if(EquipeModel::createNewteam($nomEquipe, $nomEcusson, $_SESSION['idSportif'], $idLieu)){
                                 
-                                        
+                                    $championnats = ChampionnatModel::selectAllChampionnatFromIdCoach($_SESSION['idSportif']);
+
+
+                                    foreach($championnats as $championnat)
+                                    {
+                                        ChampionnatModel::participeChampionnat($championnat['idChampionnat'], $_SESSION['idEquipe']);
+                                    }
+
                                     header('Location: /monEquipe');
                                     exit;
                                 }                                   

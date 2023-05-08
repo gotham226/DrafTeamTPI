@@ -1,7 +1,7 @@
 <!-- Lien template de base : https://github.com/dzarrorn/NFTwebsite_html-sass -->
 <?php
 
-
+use drafteam\Models\PosteModel;
 
 ?>
 <!DOCTYPE html>
@@ -148,55 +148,34 @@
         if(isset($_SESSION['email']) != "" ){
 
         
-        
+            if(isset($_SESSION['idEquipe']) != "" ){
         ?>
         <!-- Carousel Equipe -->
+
         <section class="creator spacer10" id="featured">
         <div class="container">
             <h1 class="bold size4 ta-center">Equipe</h1>
             <p class="spacebottom3 halfwhite size2 ta-center">
-                Lorem ipsum dolor sit amet, consectetur<br>adipiscing elit.
+                Les membres de votre équipe
             </p>
             <div class="swiper row creator-slider">
                 <div class="swiper-wrapper">
-                    <div class="col4 col5-md col7-s swiper-slide">
-                    <div class="card-creator bg-white10 ta-center">
-                            <img src="./assets/img/graphisteCodeur.png" class="img-responsive" alt="">
-                            <img src="./assets/img/lael.jpg" class="photo" alt="">
-                            <h5 class="spacer1 size2 bold">Laël Umutsinzi</h5>
-                            <p class="spacebottom2 halfwhite desc">Étudiant au<br> CFPT Informatique
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col4 col5-md col7-s swiper-slide">
-                    <div class="card-creator bg-white10 ta-center">
-                            <img src="./assets/img/backGab.png" class="img-responsive" alt="">
-                            <img src="./assets/img/Andreas.jpg" class="photo" alt="">
-                            <h5 class="spacer1 size2 bold">Andreas Khmelnitski</h5>
-                            <p class="spacebottom2 halfwhite desc">Étudiant au<br> CFPT Informatique
-                            </p>
-
-                        </div>
-                    </div>
-                    <div class="col4 col5-md col7-s swiper-slide">
-                    <div class="card-creator bg-white10 ta-center">
-                            <img src="./assets/img/backGab.png" class="img-responsive" alt="">
-                            <img src="./assets/img/GAB.jpg" class="photo" alt="">
-                            <h5 class="spacer1 size2 bold">Gabriel Martin</h5>
-                            <p class="spacebottom2 halfwhite desc">Étudiant au<br> CFPT Informatique
-                            </p>
-
-                        </div>
-                    </div>
-                    <div class="col4 col5-md col7-s swiper-slide">
-                    <div class="card-creator bg-white10 ta-center">
-                            <img src="./assets/img/graphisteCodeur.png" class="img-responsive" alt="">
-                            <img src="./assets/img/moi.jpg" class="photo" alt="">
-                            <h5 class="spacer1 size2 bold">Sergio Catalan</h5>
-                            <p class="spacebottom2 halfwhite desc">Étudiant au<br> CFPT Informatique
-                            </p>
- 
-                        </div>
+                    <?php
+                    foreach ($equipe as $sportif) {
+                        ?>
+                            <div class="col4 col5-md col7-s swiper-slide">
+                                <div class="card-creator bg-white10 ta-center" style="width:100%;" >
+                                    <img style="height:200px;" src="./assets/<?php if($sportif['photo'] == null){echo "img/fondBlanc.png";}else{echo "image/".$sportif['baniere'];} ?>" class="img-responsive" alt="">
+                                    <img src="./assets/<?php if($sportif['photo'] == null){echo "img/profileIcon.png";}else{echo "image/".$sportif['photo'];} ?>" class="photo" alt="">
+                                    <h5 class="spacer1 size2 bold"><?php if($sportif['nom'] == null && $sportif['prenom'] == null){echo $sportif['email'];}else{echo $sportif['prenom']. " " .$sportif['nom']; }?></h5>
+                                    <p class="spacebottom2 halfwhite desc"><?=PosteModel::selectPosteById($sportif['idPoste'])['poste']?>
+                                    </p>
+                                </div>
+                            </div>
+                        <?php
+                    }
+                    ?>
+                    
                     </div>
                 </div>
 
@@ -204,7 +183,9 @@
         </div>
     </section>
     <!-- Fin Carousel Equipe -->
-   
+            <?php
+            }
+            ?>
     
     <!-- Page profil -->
     <div id="pageProfil" style="text-align: center; margin-top:10%;">
@@ -244,7 +225,7 @@
 
                 
                 ?>
-                <p class="editeProfile"><a style="color: white;"href="/modifierProfil"> Éditer le profil</a></p>
+                <p class="editeProfile"><a style="color: white;"href="/modifierProfil?idSportif=<?=$_SESSION['idSportif']?>"> Éditer le profil</a></p>
                 <?php
                 }
                 ?>

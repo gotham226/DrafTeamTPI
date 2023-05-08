@@ -25,9 +25,9 @@ class DeleteSportifController
 
         if(isset($_POST['oui']))
         {
-            UserModel::deleteUserById($idSportif);
+            UserModel::deleteUserById($_GET['idSportif']);
 
-            header('Location: /equipe');
+            header('Location: /monEquipe');
             exit;
         }
 
