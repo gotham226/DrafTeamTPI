@@ -23,6 +23,10 @@ use drafteam\Controllers\CreationJoueurController;
 use drafteam\Controllers\DeleteSportifController;
 use drafteam\Controllers\ModifierSportifController;
 use drafteam\Controllers\InfoChampionnatController;
+use drafteam\Controllers\EvenementController;
+use drafteam\Controllers\DeleteEvenementController;
+use drafteam\Controllers\UploadController;
+use drafteam\Controllers\ModifierEvenementController;
 
 
 
@@ -48,3 +52,7 @@ Router::form('/creationJoueur', [CreationJoueurController::class, 'creationJoueu
 Router::form('/deleteSportif', [DeleteSportifController::class, 'deleteUser']);
 Router::form('/modifierSportif', [ModifierSportifController::class, 'modifierSportif']);
 Router::form('/infoChampionnat', [InfoChampionnatController::class, 'infoChampionnat']);
+Router::form('/evenement', [EvenementController::class, 'evenement']);
+Router::form('/deleteEvenement', [DeleteEvenementController::class, 'deleteEvenement']);
+Router::form('/upload', [UploadController::class, 'upload']);
+Router::form('/modifierEvenement', [ModifierEvenementController::class, 'modifierEvenement']);

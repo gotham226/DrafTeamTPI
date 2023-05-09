@@ -2,6 +2,9 @@
 <?php
 
 use drafteam\Models\PosteModel;
+use drafteam\Controllers\AccueilController;
+use drafteam\Models\LieuModel;
+use drafteam\Models\TypeModel;
 
 ?>
 <!DOCTYPE html>
@@ -79,46 +82,36 @@ use drafteam\Models\PosteModel;
                             </p>
                             
                             <div class="row box-card jc-evenly-md " style="display: flex; flex-wrap: wrap;">
-                                <section class="example" style="margin-left: 25%; width: 50%; height: 20rem; background-color: rgba(238, 238, 238, 0); box-shadow: inset 0 0.5rem 1rem rgba(0, 0, 0, 0.4);">
-                                    <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 95%;">
-                                        <ul style="width: 100%;display: -webkit-box;align-items: flex-start;height: 95%;list-style:none; margin-left:1%; ">
-                                            <li style=" border-right: 2px solid #544f61;width:30%; margin-top:4%; margin-bottom: 4%;"><h3>Heure du match:</h3> <p>20h</p></li>
-                                            <li style="width:69%; margin-top:4%; margin-bottom: 4%;">1</li>
-                                        </ul>
+                                <section class="example" style="margin-left: 20%; width: 60%; height: 20rem; background-color: rgba(238, 238, 238, 0); box-shadow: inset 0 0.5rem 1rem rgba(0, 0, 0, 0.4);">
+                                    <?php
+                                    foreach ($evenements as $evenement)
+                                    {
+                                        $date = AccueilController::formatDate($evenement['heureDebut']);
+
+                                        $lieu = LieuModel::selectLocationById($evenement['idLieu'])['nomLieu'];
+
+                                        $type = TypeModel::selectTypeById($evenement['idType'])['type'];
+                                    ?>
+                                        <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 95%;">
+                                            <ul style="width: 100%;display: -webkit-box;align-items: flex-start;height: 95%;list-style:none; margin-left:1%; font-size:120%;">
+                                                <li style=" border-right: 2px solid #544f61;width:30%; margin-top:4%; margin-bottom: 4%;"><h1>Date:</h1> <p><?=$date?></p></li>
+                                                <li style="width:69%; margin-top:2%; margin-bottom: 4%;">
+                                                    <ul style="list-style:none;">
+                                                        <li style="font-size:150%; color:black; "><strong><?=$type?></strong></li>
+                                                        <li style="font-size:120%;"><strong><?=$evenement['nomEvenement']?></strong></li>
+                                                        <li style="font-size:120%;" class="spacebottom3 halfwhite size2 ta-center"><?=$lieu?></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
                                         
-                                    </div>
-                                    <br></br>
-                                    <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 95%;">
-                                        <ul style="width: 100%;display: -webkit-box;align-items: flex-start;height: 95%;list-style:none; margin-left:1%; ">
-                                            <li style=" border-right: 2px solid #544f61;width:30%; margin-top:4%; margin-bottom: 4%;"><h3>Heure du match:</h3> <p>20h</p></li>
-                                            <li style="width:69%; margin-top:4%; margin-bottom: 4%;">1</li>
-                                        </ul>
-                                        
-                                    </div>
-                                    <br></br>
-                                    <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 95%;">
-                                        <ul style="width: 100%;display: -webkit-box;align-items: flex-start;height: 95%;list-style:none; margin-left:1%; ">
-                                            <li style=" border-right: 2px solid #544f61;width:30%; margin-top:4%; margin-bottom: 4%;"><h3>Heure du match:</h3> <p>20h</p></li>
-                                            <li style="width:69%; margin-top:4%; margin-bottom: 4%;">1</li>
-                                        </ul>
-                                        
-                                    </div>
-                                    <br></br>
-                                    <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 95%;">
-                                        <ul style="width: 100%;display: -webkit-box;align-items: flex-start;height: 95%;list-style:none; margin-left:1%; ">
-                                            <li style=" border-right: 2px solid #544f61;width:30%; margin-top:4%; margin-bottom: 4%;"><h3>Heure du match:</h3> <p>20h</p></li>
-                                            <li style="width:69%; margin-top:4%; margin-bottom: 4%;">1</li>
-                                        </ul>
-                                        
-                                    </div>
-                                    <br></br>
-                                    <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 95%;">
-                                        <ul style="width: 100%;display: -webkit-box;align-items: flex-start;height: 95%;list-style:none; margin-left:1%; ">
-                                            <li style=" border-right: 2px solid #544f61;width:30%; margin-top:4%; margin-bottom: 4%;"><h3>Heure du match:</h3> <p>20h</p></li>
-                                            <li style="width:69%; margin-top:4%; margin-bottom: 4%;">1</li>
-                                        </ul>
-                                        
-                                    </div>
+                                        </div>
+                                        <br><br>
+                                    <?php
+                                    }
+                                    
+                                    ?>
+                                    
+                                    
                                 </section>
                             </div>
                         </div>

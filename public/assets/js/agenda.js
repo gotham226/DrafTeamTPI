@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var idEvent = event['extendedProps']['publicId'];
         console.log(event);
         // Redirection vers la page d'affichage de l'événement en passant l'identifiant en paramètre
-        window.location.href = '/event?id=' + idEvent;
+        window.location.href = '/evenement?idEvenement=' + idEvent;
     });
 });
 

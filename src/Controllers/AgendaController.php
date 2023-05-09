@@ -22,11 +22,25 @@ class AgendaController
 
         $data = array();
         foreach ($result as $row) {
+            $color = "";
+
+            switch ($row['idType']) {
+                case 1:
+                    $color = "purple";
+                    break;
+                case 2:
+                    $color = "yellow";
+                    break;
+                case 3:
+                    $color = "blue";
+                    break;
+            }
+
             $data[] = array(
                 'title' => $row['nomEvenement'],
                 'start' => $row['heureDebut'],
                 'end' => $row['heureFin'],
-                'color' => 'purple',
+                'color' => $color,
                 'publicId' => $row['idEvenement']
             );
         }

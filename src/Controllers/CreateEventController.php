@@ -35,6 +35,8 @@ class CreateEventController
             if($nom !="" && $description !="" && $type !="" && $lieu !="" && $debut !="" && $fin !="")
             {
                 EventModel::createNewEvent($nom, $description, $type, $lieu, $debut, $fin);
+                header("Location: /");
+                exit;
             }
         }
         require_once('../src/Views/createEvent.php');

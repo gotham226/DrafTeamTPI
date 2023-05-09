@@ -17,5 +17,15 @@ class LieuModel
         return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function selectLocationById($idLieu)
+    {
+        $sql = "SELECT * FROM lieu WHERE idLieu = ?";
+        $data = [
+            $idLieu
+        ];
+        
+        return database::dbRun($sql, $data)->fetch(PDO::FETCH_ASSOC);
+    }
+
     
 }

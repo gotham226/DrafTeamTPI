@@ -23,6 +23,8 @@ class ModifierEquipeController
             exit;
         }
 
+        
+
         $equipe = EquipeModel::selectATeamById($_SESSION['idEquipe']);
 
         $error="";

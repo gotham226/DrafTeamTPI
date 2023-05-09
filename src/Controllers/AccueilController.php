@@ -3,6 +3,7 @@
 
 namespace drafteam\Controllers;
 use drafteam\Models\UserModel; 
+use drafteam\Models\EventModel; 
 
 session_start();
 
@@ -15,7 +16,28 @@ class AccueilController
         {
             $equipe = UserModel::takeAllPeopleByIdEquipe($_SESSION['idEquipe']);
         }
+
+        $evenements = EventModel::selectNextFiveEvent();
+
+        
+
         
         require_once('../src/Views/accueil.php');
+    }
+
+    public function formatDate($date) {
+        $jourSemaine = array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi');
+        $mois = array('', 'janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
+    
+        $timestamp = strtotime($date);
+        $jour = $jourSemaine[date('w', $timestamp)];
+        $numJour = date('j', $timestamp);
+        $moisNum = date('n', $timestamp);
+        $nomMois = $mois[$moisNum];
+        $annee = date('Y', $timestamp);
+        $heure = date('G', $timestamp);
+        $minute = date('i', $timestamp);
+    
+        return "$jour $numJour $nomMois $annee à $heure:$minute";
     }
 }

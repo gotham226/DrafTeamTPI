@@ -12,11 +12,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@400;500;700&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/agenda.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script>
-    <script src="./assets/js/agenda.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Draft Team</title>
 </head>
 
@@ -25,23 +22,47 @@
     
     <a name="top"></a>
     <header class="header bg-white10 shadow">
-
-       <?php
+        <?php
         require_once('inc/nav.php');
         ?>
 
+
     </header>
       <!-- header section Fin -->
-    <div style="width: 80%; margin-left:10%; margin-bottom: 10%;height: 70%;">
-        <div id='calendar' style="margin-top:7%; height:100%;">
-        
-        </div>
-
-    </div>
-    <p id="message"></p>
-    <!-- footer section starts -->
     
+   
+
+    <div>
+        
+        
+            
+        <h1 class="size5 bold spacebottom1" style="text-align: center; margin-top:7%;">Veux-tu vraiment supprimer cet évènement ?</h1>
+        <form method="post" style="width: 100%; max-width: 100%;">
+            <ul style="display: inline-flex; list-style: none; width: 100%;margin-top: 5%;">
+                <li style="margin-left:42%;width: 10%;">
+                    <button name="oui" style="width: 50%;" type="submit" class="btn bg-purple wallet">Oui</button> 
+                </li>
+
+                <li style=" width: 10%;">
+                    <button style="width: 50%;" name="annuler" type="submit" class="btn bg-purple wallet">Annuler</button> 
+                </li>
+            </ul>
+        </form>
+        
+
+        
+    </div>
+    <!-- footer section starts -->
+    <footer class="spacer10">
+        <div class="container row jc-between flexcol-s ta-center-s ">
+            <div class="row flexcol spacebottom3-s spaceleft3-s">
+                
+            </div>
+        </div>
+    </footer>
     <!-- footer section ends -->
+
+    
 
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <!-- custom js file link -->
