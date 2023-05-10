@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Auteur: Gabriel Martin
+ * Date: 09.05.2023
+ * Description: Page controller pour la page evenement
+ * Version 1.0
+ */
+
 namespace drafteam\Controllers;
 
 use drafteam\Models\EventModel;
@@ -25,6 +32,16 @@ class EvenementController
             exit;
         }
 
+
+        if(EventModel::checkIfImInvited($_SESSION['idSportif'], $_GET['idEvenement']))
+        {
+            $invited = true;
+            $infoParticipation = EventModel::checkIfImInvited($_SESSION['idSportif'], $_GET['idEvenement']);
+        }
+        else{
+            $invited = false;
+        }
+
         $uploads_dir = './assets/image';
 
         $error = "";
@@ -42,6 +59,7 @@ class EvenementController
         $adresse = LieuModel::selectLocationById($evenement['idLieu'])['adresse'];
 
         $type = TypeModel::selectTypeById($evenement['idType'])['type'];
+
 
         if(isset($_FILES['image']['name']) !="")
         {
@@ -77,16 +95,14 @@ class EvenementController
                 }    
             }
         }
+
+        if(isset($_POST['present']))
+        {
+            EventModel::metPresent($_SESSION['idSportif'], $_GET['idEvenement']);
+            header('Location: /evenement?idEvenement='.$_GET['idEvenement']);
+            exit;
+        }
             
-
-        
-
-
-        
-
-
-
-        
         require_once('../src/Views/evenement.php');
     }
 
@@ -103,5 +119,6 @@ class EvenementController
         return $heures. "H" . $minutes;
 
     }
+
 
 }

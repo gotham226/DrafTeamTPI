@@ -48,7 +48,7 @@
             <?php
             foreach ($lieus as $lieu) {
                 ?>
-                <!-- Pour séléctionner la valeur dans la base de données par défaut -->
+                <!-- Pour Sélectionner la valeur dans la base de données par défaut -->
                 <option style="color: black;" value="<?=$lieu['idLieu'];?>" <?php if($lieu['idLieu'] == $equipe['idLieu']){echo "selected";}?>><?=$lieu['nomLieu']?></option>
                 <?php
             }

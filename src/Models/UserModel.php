@@ -1,4 +1,10 @@
 <?php
+/**
+ * Auteur: Gabriel Martin
+ * Date: 04.05.2023
+ * Description: Page contenant toute les requêtes concernant les utilisateurs
+ * Version 1.0
+ */
 
 namespace drafteam\Models;
 use drafteam\Models\database;
@@ -181,6 +187,34 @@ class UserModel
         ];
         
         return database::dbRun($sql, $data);
+    }
+
+    public static function selectAllUninvitedPlayers($idEvenement)
+    {
+        $sql = "SELECT *
+        FROM sportif
+        LEFT JOIN poste ON sportif.idPoste = poste.idPoste
+        WHERE poste.staff = 0 AND poste.admin = 0 AND sportif.idSportif NOT IN (
+            SELECT idSportif FROM etre_present WHERE idEvenement = ?)";
+
+        $data = [
+            $idEvenement
+        ];
+        return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function selectAllUninvitedStaff($idEvenement)
+    {
+        $sql = "SELECT *
+        FROM sportif
+        LEFT JOIN poste ON sportif.idPoste = poste.idPoste
+        WHERE poste.staff = 1 AND poste.admin = 0 AND sportif.idSportif NOT IN (
+            SELECT idSportif FROM etre_present WHERE idEvenement = ?)";
+
+        $data = [
+            $idEvenement
+        ];
+        return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
     }
 
 

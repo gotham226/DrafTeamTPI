@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Auteur: Gabriel Martin
+ * Date: 02.05.2023
+ * Description: Page controller pour la page inscriptoon
+ * Version 1.0
+ */
 namespace drafteam\Controllers;
 use drafteam\Models\UserModel;
 

@@ -92,6 +92,7 @@ use drafteam\Models\TypeModel;
 
                                         $type = TypeModel::selectTypeById($evenement['idType'])['type'];
                                     ?>
+                                    <a href="/evenement?idEvenement=<?=$evenement['idEvenement']?>" style="color: white;">
                                         <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 95%;">
                                             <ul style="width: 100%;display: -webkit-box;align-items: flex-start;height: 95%;list-style:none; margin-left:1%; font-size:120%;">
                                                 <li style=" border-right: 2px solid #544f61;width:30%; margin-top:4%; margin-bottom: 4%;"><h1>Date:</h1> <p><?=$date?></p></li>
@@ -105,6 +106,7 @@ use drafteam\Models\TypeModel;
                                             </ul>
                                         
                                         </div>
+                                    </a>
                                         <br><br>
                                     <?php
                                     }

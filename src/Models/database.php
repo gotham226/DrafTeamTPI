@@ -1,4 +1,10 @@
 <?php
+/**
+ * Auteur: Gabriel Martin
+ * Date: 02.05.2023
+ * Description: Page contenant la connexion à la base de données et une foncion qui execute les requêtes
+ * Version 1.0
+ */
 
 namespace drafteam\Models;
 

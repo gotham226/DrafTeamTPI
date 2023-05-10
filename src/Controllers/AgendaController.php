@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Auteur: Gabriel Martin
+ * Date: 08.05.2023
+ * Description: Page controller pour la page Agenda
+ * Version 1.0
+ */
+
 namespace drafteam\Controllers;
 
 use drafteam\Models\AgendaModel;
@@ -29,7 +36,7 @@ class AgendaController
                     $color = "purple";
                     break;
                 case 2:
-                    $color = "yellow";
+                    $color = "red";
                     break;
                 case 3:
                     $color = "blue";

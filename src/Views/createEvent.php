@@ -59,7 +59,7 @@
 
             <label style="font-size: 20px; font-weight: bold;">Type d'évènement</label>
             <select name="type" style="border-radius: 8px;">
-            <option style="color: black; text-align:center;" value="">--> Séléctionnez le type de l'évènement <--</option>
+            <option style="color: black; text-align:center;" value="">--> Sélectionnez le type de l'évènement <--</option>
             <?php
             foreach ($types as $type) {
                 ?>
@@ -73,7 +73,7 @@
 
             <label style="font-size: 20px; font-weight: bold;">Lieu de l'évènements</label>
             <select name="lieu" style="border-radius: 8px;">
-            <option style="color: black; text-align:center;" value="">--> Séléctionnez le lieu de votre évènement <--</option>
+            <option style="color: black; text-align:center;" value="">--> Sélectionnez le lieu de votre évènement <--</option>
             <?php
             foreach ($lieux as $lieu) {
                 ?>

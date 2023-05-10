@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Auteur: Gabriel Martin
+ * Date: 09.05.2023
+ * Description: Page controller pour la page de modification de profil
+ * Version 1.0
+ */
 namespace drafteam\Controllers;
 use drafteam\Models\UserModel;
 use drafteam\Models\PosteModel;

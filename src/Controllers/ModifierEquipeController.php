@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Auteur: Gabriel Martin
+ * Date: 04.05.2023
+ * Description: Page controller pour la page de modification d'équipe
+ * Version 1.0
+ */
 namespace drafteam\Controllers;
 use drafteam\Models\EquipeModel;
 use drafteam\Models\UserModel;

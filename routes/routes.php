@@ -27,7 +27,8 @@ use drafteam\Controllers\EvenementController;
 use drafteam\Controllers\DeleteEvenementController;
 use drafteam\Controllers\UploadController;
 use drafteam\Controllers\ModifierEvenementController;
-
+use drafteam\Controllers\InvitationEvenementController;
+use drafteam\Controllers\JustifierAbsenceController;
 
 
 Router::form('/', [AccueilController::class, 'accueil']);
@@ -56,3 +57,5 @@ Router::form('/evenement', [EvenementController::class, 'evenement']);
 Router::form('/deleteEvenement', [DeleteEvenementController::class, 'deleteEvenement']);
 Router::form('/upload', [UploadController::class, 'upload']);
 Router::form('/modifierEvenement', [ModifierEvenementController::class, 'modifierEvenement']);
+Router::form('/invitation', [InvitationEvenementController::class, 'invitationEvenement']);
+Router::form('/justification', [JustifierAbsenceController::class, 'justification']);
