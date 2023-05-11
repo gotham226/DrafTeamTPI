@@ -55,6 +55,7 @@ class ModifierProfilController
                     $nomprofil = $sportif['photo'];
                     $canUploadProfil = true;
                 }else{
+                    // Test que la taille ne dépasse pas le maximum autoriser par le serveur 
                     if($_FILES['profil']['size']<= 3000000){
                         
                         $typeMediaprofil = $_FILES['profil']['type'];
@@ -70,6 +71,7 @@ class ModifierProfilController
                         // Test si le fichier est bien une image
                         if($typeMediaprofil=="image/png" || $typeMediaprofil=="image/jpeg" || $typeMediaprofil=="image/jpg"){
                             $dateDuPost = date( "Y-m-d H:i:s");
+                            // Créer un nom de fichier unique
                             $nomprofil = $_FILES['profil']['name'].$dateDuPost.".".$extensionsFichierprofil;
                             $canUploadProfil = true;
                             $nomprofil = str_replace(' ', '', $nomprofil);
@@ -86,6 +88,7 @@ class ModifierProfilController
                     $nomBaniere = $sportif['baniere'];
                     $canUploadBaniere = true;
                 }else{
+                    // Test que la taille ne dépasse pas le maximum autoriser par le serveur 
                     if($_FILES['baniere']['size']<= 3000000){
                         
                         $typeMediaBaniere = $_FILES['baniere']['type'];
@@ -101,6 +104,7 @@ class ModifierProfilController
                         // Test si le fichier est bien une image
                         if($typeMediaBaniere=="image/png" || $typeMediaBaniere=="image/jpeg" || $typeMediaBaniere=="image/jpg"){
                             $dateDuPost = date( "Y-m-d H:i:s");
+                            // Créer un nom de fichier unique
                             $nomBaniere = $_FILES['baniere']['name'].$dateDuPost.".".$extensionsFichierBaniere;
                             $canUploadBaniere = true;
                             $nomBaniere = str_replace(' ', '', $nomBaniere);
@@ -118,6 +122,7 @@ class ModifierProfilController
                     if($canUploadProfil == true && $canUploadBaniere == true)
                     {
 
+                        // Si la photo de profil n'a pas changer 
                         if($nomprofil != $sportif['photo'])
                         {
                             if(move_uploaded_file($_FILES['profil']['tmp_name'], "$uploads_dir/$nomprofil"))
@@ -128,7 +133,7 @@ class ModifierProfilController
                                 }
                             }
                         }
-
+                        // Si la baniere n'a pas changer 
                         if($nomBaniere != $sportif['baniere'])
                         {
                             if(move_uploaded_file($_FILES['baniere']['tmp_name'], "$uploads_dir/$nomBaniere"))
@@ -139,9 +144,13 @@ class ModifierProfilController
                                 }
                             }
                         }
+                        if($dateNaissance=="")
+                        {
+                            $dateNaissance = null;
+                        }
 
                         if(UserModel::updateUser($_SESSION['idSportif'], $nom, $prenom, $dateNaissance, $numTel, $email, $nomprofil, $nomBaniere)){
-                                
+                            // Met à jour les informations du sportif
                             $_SESSION['email'] = $email;
                             $_SESSION['photoProfil'] = $nomprofil;
                             $_SESSION['photoBaniere'] = $nomBaniere;

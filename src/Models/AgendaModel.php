@@ -17,11 +17,13 @@ class AgendaModel
      * Sélectionne tous les événements.
      * @return array Tableau associatif contenant les informations de tous les événements.
      */
-    public static function selectAllEvent()
+    public static function selectAllEventByIdEquipe($idEquipe)
     {
-        $sql = "SELECT * FROM evenement";
-
-        return database::dbRun($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "SELECT * FROM evenement WHERE idEquipe = ?";
+        $data = [
+            $idEquipe
+        ];
+        return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
     }
     
 }

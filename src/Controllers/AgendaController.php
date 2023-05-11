@@ -23,14 +23,18 @@ class AgendaController
         require_once('../src/Views/agenda.php');
     }
 
+    //Récupère tous les événements de l'équipe actuelle et les formate pour la vue de l'agenda.
     public function agendaEvent()
     {
-        $result = AgendaModel::selectAllEvent();
+        // Récupération de tous les événements de l'équipe actuelle dans la base de données.
+        $result = AgendaModel::selectAllEventByIdEquipe($_SESSION['idEquipe']);
 
         $data = array();
+        // Pour chaque événement, on formatte les informations nécessaires pour l'affichage.
         foreach ($result as $row) {
             $color = "";
 
+            // Définition de la couleur de l'événement en fonction de son type.
             switch ($row['idType']) {
                 case 1:
                     $color = "purple";
@@ -51,7 +55,8 @@ class AgendaController
                 'publicId' => $row['idEvenement']
             );
         }
-        //date( "Y-m-d\TH:i:s")
+        
+        // Encodage des données au format JSON pour l'affichage dans la vue.
         echo json_encode($data);
     }
 }

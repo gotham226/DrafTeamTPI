@@ -46,7 +46,7 @@ class ModifierEquipeController
             {
                 if($_FILES['ecusson']['name'] != ""){
 
-                
+                    // Test que la taille ne dépasse pas le maximum autoriser par le serveur 
                     if($_FILES['ecusson']['size']<= 3000000){
                         
                         $typeMediaEcusson = $_FILES['ecusson']['type'];
@@ -62,6 +62,7 @@ class ModifierEquipeController
                         // Test si le fichier est bien une image
                         if($typeMediaEcusson=="image/png" || $typeMediaEcusson=="image/jpeg" || $typeMediaEcusson=="image/jpg"){
                             $dateDuPost = date( "Y-m-d H:i:s");
+                            // Créer un nom de fichier unique
                             $nomEcusson = $_FILES['ecusson']['name'].$dateDuPost.".".$extensionsFichierEcusson;
                             $canUploadEcusson = true;
                             $nomEcusson = str_replace(' ', '', $nomEcusson);

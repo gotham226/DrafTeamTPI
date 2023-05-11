@@ -50,7 +50,7 @@ class ModifierEvenementController
             
             if($nomEvenement != "" && $description != "" && $type != "" && $lieu != "" && $debut != "" && $fin != "" )
             {
-                
+                // S'il n'y a pas d'image on modifie sans  modifier l'image
                 if($_FILES['image']['name'] == '')
                 {
                     if(EventModel::updateEventWithoutImage($nomEvenement, $description, $type, $lieu, $debut, $fin, $_GET['idEvenement']))
@@ -60,7 +60,7 @@ class ModifierEvenementController
                     }
 
                 }else{
-
+                    // Test que la taille ne dépasse pas le maximum autoriser par le serveur 
                     if($_FILES['image']['size']<= 3000000){
             
                         $typeMedia = $_FILES['image']['type'];
@@ -76,6 +76,7 @@ class ModifierEvenementController
                         // Test si le fichier est bien une image
                         if($typeMedia=="image/png" || $typeMedia=="image/jpeg" || $typeMedia=="image/jpg"){
                             $dateDuPost = date( "Y-m-d H:i:s");
+                            // Test que la taille ne dépasse pas le maximum autoriser par le serveur 
                             $nom = $_FILES['image']['name'].$dateDuPost.".".$extensionsFichier;
                             $canUpload = true;
                         }else{

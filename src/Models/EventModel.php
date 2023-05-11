@@ -13,10 +13,21 @@ use PDO;
 
 class EventModel
 {   
-    // Créer un nouvel événements
+    
+    /**
+     * Crée un nouvel événement
+     * 
+     * @param string $nom Nom de l'événement
+     * @param string $description Description de l'événement
+     * @param int $type ID du type de l'événement
+     * @param int $lieu ID du lieu de l'événement
+     * @param string $debut Date et heure de début de l'événement (format: YYYY-MM-DD HH:mm:ss)
+     * @param string $fin Date et heure de fin de l'événement (format: YYYY-MM-DD HH:mm:ss)
+     * @return bool Renvoie true si l'événement a été créé avec succès, false sinon
+     */
     public static function createNewEvent($nom, $description, $type, $lieu, $debut, $fin)
     {
-
+        // Récupère la date de l'événement 
         $dateEvenement = substr($fin, 0, 10);
 
         $sql = "INSERT INTO evenement(nomEvenement, description, dateEvenement, heureDebut, heureFin, idType, idLieu, idSportif, idEquipe) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
@@ -36,7 +47,13 @@ class EventModel
         return database::dbRun($sql, $data);
     }
 
-    // Sélectionne un événements en fonction de son id 
+
+    /**
+     * Sélectionne un événement par son ID
+     * 
+     * @param int $idEvent ID de l'événement à sélectionner
+     * @return array Tableau associatif contenant les informations de l'événement sélectionné, ou null si l'événement n'existe pas
+     */
     public static function selectEventById($idEvent){
         $sql = "SELECT * FROM evenement WHERE idEvenement = ?";
         $data = [
@@ -45,14 +62,20 @@ class EventModel
         return database::dbRun($sql, $data)->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Séléctione tout les joueurs inviter à un événement 
+
+    /**
+     * Sélectionne les joueurs invités à un événement
+     * 
+     * @param int $idEvent ID de l'événement
+     * @return array Tableau associatif contenant les informations des joueurs invités à l'événement
+     */
     public static function selectGuestPlayer($idEvent)
     {
         $sql = "SELECT sportif.*
         FROM sportif
         INNER JOIN etre_present ON sportif.idSportif = etre_present.idSportif
         LEFT JOIN poste ON sportif.idPoste = poste.idPoste
-        WHERE poste.staff = 0 AND poste.admin = 0 AND etre_present.idEvenement = ?";
+        WHERE poste.staff = 0 AND poste.admin = 0 AND etre_present.idEvenement = ? ORDER BY etre_present.present DESC";
 
         $data = [
             $idEvent
@@ -61,14 +84,19 @@ class EventModel
 
     }
 
-    // Séléctione tout les staffs inviter à un événement
+    /**
+     * Sélectionne les joueurs invités qui sont membres du staff à un événement
+     * 
+     * @param int $idEvent ID de l'événement
+     * @return array Tableau associatif contenant les informations des joueurs invités membres du staff à l'événement
+     */
     public static function selectGuestStaff($idEvent)
     {
         $sql = "SELECT sportif.*
         FROM sportif
         INNER JOIN etre_present ON sportif.idSportif = etre_present.idSportif
         LEFT JOIN poste ON sportif.idPoste = poste.idPoste
-        WHERE poste.staff = 1 AND poste.admin = 0 AND etre_present.idEvenement = ?";
+        WHERE poste.staff = 1 AND poste.admin = 0 AND etre_present.idEvenement = ? ORDER BY etre_present.present DESC";
 
         $data = [
             $idEvent
@@ -76,7 +104,12 @@ class EventModel
         return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Supprime un événement et les liaison dans la table etre_present et l'image liée à l'événement si il y en a une
+   /**
+    * Supprime un événement de la base de données
+
+    * @param int $idEvent ID de l'événement à supprimer
+    * @return void
+    */
     public static function deleteEvent($idEvent)
     {
         if(EventModel::selectEventById($idEvent)['image'] != "" && EventModel::selectEventById($idEvent)['image'] != null)
@@ -104,7 +137,13 @@ class EventModel
 
     }
 
-    // Modifie l'image de l'événement
+    /**
+     * Met à jour l'image associée à un événement
+     * 
+     * @param string $nomImage Nom de l'image à associer à l'événement
+     * @param int $idEvenement ID de l'événement
+     * @return bool Renvoie TRUE si la mise à jour s'est bien déroulée, FALSE sinon
+     */
     public static function updateImageEvent($nomImage, $idEvenement)
     {
         $sql = "UPDATE evenement SET image = ? WHERE idEvenement = ?";
@@ -117,7 +156,18 @@ class EventModel
         return database::dbRun($sql, $data);
     }
 
-    // Modifie un événement sans modifier l'image
+    /**
+     * Met à jour les informations d'un événement sans changer l'image
+     * 
+     * @param string $nom Le nouveau nom de l'événement
+     * @param string $description La nouvelle description de l'événement
+     * @param int $type L'ID du nouveau type d'événement
+     * @param int $lieu L'ID du nouveau lieu de l'événement
+     * @param string $debut La nouvelle heure de début de l'événement
+     * @param string $fin La nouvelle heure de fin de l'événement
+     * @param int $idEvenement L'ID de l'événement à mettre à jour
+     * @return bool Renvoie true si la mise à jour a été effectuée avec succès, false sinon
+     */
     public static function updateEventWithoutImage($nom, $description, $type, $lieu, $debut, $fin, $idEvenement)
     {
         $sql = "UPDATE evenement SET nomEvenement = ?, description = ?, idType = ?, idLieu = ?, heureDebut = ?, heureFin = ?  WHERE idEvenement = ?";
@@ -135,7 +185,19 @@ class EventModel
         return database::dbRun($sql, $data);
     }
 
-    // Modifie un événement en modifiant l'image
+    /**
+     * Met à jour les informations d'un événement avec une image
+
+     * @param string $nom Nom de l'événement
+     * @param string $description Description de l'événement
+     * @param int $type ID du type de l'événement
+     * @param int $lieu ID du lieu de l'événement
+     * @param string $debut Date et heure de début de l'événement (format Y-m-d H:i:s)
+     * @param string $fin Date et heure de fin de l'événement (format Y-m-d H:i:s)
+     * @param int $idEvenement ID de l'événement à mettre à jour
+     * @param string $image Nom de l'image de l'événement
+     * @return bool Retourne true si la mise à jour a réussi, false sinon
+     */
     public static function updateEvent($nom, $description, $type, $lieu, $debut, $fin, $idEvenement, $image)
     {
         $sql = "UPDATE evenement SET nomEvenement = ?, description = ?, idType = ?, idLieu = ?, heureDebut = ?, heureFin = ?, image = ?  WHERE idEvenement = ?";
@@ -154,20 +216,31 @@ class EventModel
         return database::dbRun($sql, $data);
     }
 
-    // Sélectionne les 5 prochains événements
-    public static function selectNextFiveEvent(){
+    /**
+     * Sélectionne les 5 prochains événements à venir pour une équipe
+     * 
+     * @param int $idEquipe ID de l'équipe
+     * @return array Tableau associatif contenant les informations des 5 prochains événements à venir pour l'équipe
+     */
+    public static function selectNextFiveEvent($idEquipe){
         $sql = "SELECT *
         FROM evenement
-        WHERE heureDebut >= NOW()
+        WHERE heureDebut >= NOW() AND idEquipe = ?
         ORDER BY heureDebut ASC
         LIMIT 5;";
         $data = [
-            
+            $idEquipe
         ];
         return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Ajoute un sportif dans la table etre_present avec l'id de l'événement ou il est inviter
+    /**
+     *Invite un sportif à un événement
+     *
+     *@param int $idSportif ID du joueur à inviter
+     *@param int $idEvenement ID de l'événement auquel inviter le joueur
+     *@return bool Renvoie true si l'invitation a été ajoutée avec succès, false sinon
+    */
     public static function inviteAPlayerToEvent($idSportif, $idEvenement)
     {
 
@@ -181,7 +254,13 @@ class EventModel
         return database::dbRun($sql, $data);
     }
 
-    // Met un sportif présent a un événements 
+    /**
+     * Marque un joueur comme présent à un événement
+     *
+     * @param int $idSportif ID du joueur
+     * @param int $idEvenement ID de l'événement
+     * @return bool Renvoie vrai si la mise à jour a été effectuée avec succès, faux sinon
+     */
     public static function metPresent($idSportif, $idEvenement)
     {
 
@@ -197,7 +276,13 @@ class EventModel
         return database::dbRun($sql, $data);
     }
 
-    // Check si un sportif est inviter a un événement
+    /**
+     *Récupère les informations d'un joueur invité à un événement
+
+     *@param int $idSportif ID du joueur
+     *@param int $idEvenement ID de l'événement
+     *@return array|false Renvoie un tableau associatif contenant les informations du joueur invité à l'événement, ou faux s'il n'est pas invité
+    */
     public static function checkIfImInvited($idSportif, $idEvenement)
     {
 
@@ -209,7 +294,14 @@ class EventModel
         return database::dbRun($sql, $data)->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Met un sportif absent avec un commentaire dans la table etre_present
+    /**
+    * Marque un joueur comme absent à un événement avec une raison donnée
+    *
+    * @param int $idSportif ID du joueur
+    * @param int $idEvenement ID de l'événement
+    * @param string $raison Raison de l'absence
+    * @return bool Renvoie vrai si la mise à jour a été effectuée avec succès, faux sinon
+    */
     public static function metAbsentAvecRaison($idSportif, $idEvenement, $raison)
     {
 
@@ -219,6 +311,26 @@ class EventModel
             0,   
             $raison,
             $idSportif,             
+            $idEvenement
+        ];
+
+        return database::dbRun($sql, $data);
+    }
+
+    /**
+    * Met à jour le score d'un événement
+    *
+    * @param int $idEvenement ID de l'événement
+    * @param string $resultat Score sous forme de chaîne de caractères
+    * @return bool Renvoie vrai si la mise à jour a été effectuée avec succès, faux sinon
+    */
+    public static function setScore($idEvenement, $resultat)
+    {
+
+        $sql = "UPDATE evenement SET resultat = ? WHERE idEvenement = ?;";
+        
+        $data = [         
+            $resultat,   
             $idEvenement
         ];
 

@@ -41,7 +41,7 @@ class CreationJoueurController
                     $options = [
                         'cost' => 10,
                     ];
-                    //* hash le mot de passe en BCRYPT 
+                    // Hash le mot de passe en BCRYPT 
                     $hashPassword = password_hash($mdp, PASSWORD_BCRYPT, $options);
 
                     if(UserModel::registerUser("", "", $email, $hashPassword, null, null, null, null, $idPoste, $_SESSION['idEquipe']))
@@ -64,6 +64,7 @@ class CreationJoueurController
         require_once('../src/Views/creationJoueur.php');
     }
 
+    // Fonction qui génère un mot de passe aléatoire
     public function generatePassword() {
         $length = 8;
         $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

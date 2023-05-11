@@ -36,19 +36,9 @@
         
         
             
-        <h1 class="size5 bold spacebottom1" style="text-align: center; margin-top:7%;"><?=$message?></h1>
-        <h1 style=" margin-top:1%;" class="spacebottom3 halfwhite size2 ta-center"><?=$message2?></h1>
-        <form method="post" style="width: 100%; max-width: 100%;">
-            <ul style="display: inline-flex; list-style: none; width: 100%;margin-top: 5%;">
-                <li style="margin-left:42%;width: 10%;">
-                    <button name="oui" style="width: 50%;" type="submit" class="btn bg-purple wallet">Oui</button> 
-                </li>
-
-                <li style=" width: 10%;">
-                    <button style="width: 50%;" name="annuler" type="submit" class="btn bg-purple wallet">Annuler</button> 
-                </li>
-            </ul>
-        </form>
+        <h1 class="size5 bold spacebottom1" style="text-align: center; margin-top:7%;">Raison :</h1>
+        <h1 class="size4 bold spacebottom1" style="text-align: center; margin-top:7%;"><?=$_GET['commentaire']?></h1>
+        
         
 
         

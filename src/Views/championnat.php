@@ -35,46 +35,7 @@
     <div>
         
         <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 6%; margin-bottom: 3%;">Gestion championnats</h1>
-        
-        <?php if($idChampionnatActif != null){?>
-            <h1 style=" margin-top:1%;" class="spacebottom3 halfwhite size2 ta-center">Championnat actif </h1>
-            <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 20%;">
-                    <br>
-                    <br>
-                    <?php
-                    if(isset($_SESSION['entraineur']))
-                    {
-                        
-                            
-                        ?>
-
-                            <ul style="display: inline-flex; list-style: none; width:100%; ">
-                                <li style="margin-left: 5%;"><button  onclick="location.href='/desactiver?idChampionnatActif='$idChampionnatActif" style="color: black;" class="btn">Désactiver</button></li>
-                                <a style="margin-left: 5%; color: white;" href="/infoChampionnat?idChampionnat=<?=$idChampionnatActif?>"><li ><h2 style="text-align: center;"><?php echo $championnatsActif['nomChampionnat']." ". $championnatsActif['saison']."/". $championnatsActif['saison']+1?></h2></li></a>
-                            </ul>
-                            <br>
-                            <div class="text-center"> <a href="modifierChampionnat?idChampionnat=<?=$idChampionnatActif?>" style="color: white;"> <button  style=" color: blue; background-color: #0a78df00; border: none;" class="material-icons button edit">edit</button> </a>
-                            <a href="deleteChampionnat?idChampionnat=<?=$idChampionnatActif?>"> <button  style=" color: red; background-color: #0a78df00; border: none;"  class="material-icons button delete">delete</button> </a>
-                            
-                            </div>
-                        <?php
-                        ?>
-                            
-                        <?php
-                        }else{
-                        ?>
-                            <a style="margin-left: 11%; color: white;" href="/infoChampionnat?idChampionnat=<?=$idChampionnatActif?>"><h2 style="text-align: center;"><?php echo $championnatsActif['nomChampionnat']." ". $championnatsActif['saison']."/". $championnatsActif['saison']+1?></h2></a>
-                        <?php
-                        }
-                        ?>
-                    </div>
-                    <br></br>
-            
-            </div>
-            <br></br>
-            <br></br>
         <?php
-        }
         if(isset($_SESSION['entraineur']))
         {
         ?>
@@ -89,7 +50,52 @@
         }
         ?>
             <br></br>
+        
+        <?php if($idChampionnatActif != null){?>
+            <h1 style=" margin-top:1%;" class="spacebottom3 halfwhite size2 ta-center">Championnat actif </h1>
+            <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 20%;">
+                    <br>
+                    <br>
+                    <?php
+                    if(isset($_SESSION['entraineur']))
+                    {
+                        
+                            
+                        ?>
 
+                            <ul style="display: inline-flex; list-style: none; width:100%; ">
+                                <li style="margin-left: 5%;"><button  onclick="location.href='/mettreActif?idChampionnatDesactiver=<?=$idChampionnatActif?>'" style="color: black;" class="btn">Désactiver</button></li>
+                                <a style="margin-left: 5%; color: white;" href="/infoChampionnat?idChampionnat=<?=$idChampionnatActif?>"><li ><h2 style="text-align: center;"><?php echo $championnatsActif['nomChampionnat']." ". $championnatsActif['saison']."/". $championnatsActif['saison']+1?></h2></li></a>
+                            </ul>
+                            <br>
+                            <?php
+                            if($championnatsActif['idSportif'] == $_SESSION['idSportif'])
+                            {
+                            ?>
+                                <div class="text-center"> <a href="modifierChampionnat?idChampionnat=<?=$idChampionnatActif?>" style="color: white;"> <button  style=" color: blue; background-color: #0a78df00; border: none;" class="material-icons button edit">edit</button> </a>
+                                <a href="deleteChampionnat?idChampionnat=<?=$idChampionnatActif?>"> <button  style=" color: red; background-color: #0a78df00; border: none;"  class="material-icons button delete">delete</button> </a>
+                                </div>
+                            <?php
+                            }
+                        ?>
+                            
+                        <?php
+                        }else{
+                        ?>
+                            <a style="margin-left: 11%; color: white;" href="/infoChampionnat?idChampionnat=<?=$idChampionnatActif?>"><h2 style="text-align: center;"><?php echo $championnatsActif['nomChampionnat']." ". $championnatsActif['saison']."/". $championnatsActif['saison']+1?></h2></a>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                    <br></br>
+            
+            </div>
+            <br><br>
+        <?php
+        }
+        ?>
+        
+            <h1 style=" margin-top:1%;" class="spacebottom3 halfwhite size2 ta-center">Mes championnats </h1>
         <?php
         foreach ($championnats as $championnat)
         {
@@ -111,7 +117,7 @@
                         
                     ?>
                         <ul style="display: inline-flex; list-style: none; width:100%; ">
-                            <li style="margin-left: 5%;"><button  onclick="location.href='/mettreActif?idChampionnat=<?=$idChampionnat?>'" style="color: black;" class="btn">Activer</button></li>
+                            <li style="margin-left: 5%;"><button  onclick="location.href='/mettreActif?idChampionnat=<?=$idChampionnat?>'" style="color: black;" class="btn">Rejoindre</button></li>
                             <a style="margin-left: 11%; color: white;" href="/infoChampionnat?idChampionnat=<?=$idChampionnat?>"><li ><h2 style="text-align: center;"><?php echo $nomChampionnat." ". $saison?></h2></li></a>
                         </ul>
                         <br>
@@ -148,6 +154,57 @@
                 }   
             }
             ?>
+            <h1 style=" margin-top:1%;" class="spacebottom3 halfwhite size2 ta-center">Tous les championnats</h1>
+            <?php
+            foreach ($autreChampionnats as $championnat)
+            {
+                $idChampionnat = $championnat['idChampionnat'];
+                $nomChampionnat = $championnat['nomChampionnat'];
+                $saison = $championnat['saison']."/".$championnat['saison']+1;
+
+                if($idChampionnatActif != $idChampionnat){
+            ?>
+                
+                <div class="container spacer5 ta-center bg-purple" style="background-color: rgba(238, 238, 238, 0);box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);width: 20%;">
+                    <br>
+                    <br>
+                    <?php
+                    
+                    if(isset($_SESSION['entraineur']))
+                    {
+                        if(isset($_SESSION['idEquipe'])!=null){
+                            
+                        ?>
+                            <ul style="display: inline-flex; list-style: none; width:100%; ">
+                                <li style="margin-left: 5%;"><button  onclick="location.href='/rejoindreChampionnat?idChampionnat=<?=$idChampionnat?>'" style="color: black;" class="btn">Rejoindre</button></li>
+                                <a style="margin-left: 11%; color: white;" href="/infoChampionnat?idChampionnat=<?=$idChampionnat?>"><li ><h2 style="text-align: center;"><?php echo $nomChampionnat." ". $saison?></h2></li></a>
+                            </ul>
+                        <?php
+                        }else{
+                            ?>
+                            <a href="/infoChampionnat?idChampionnat=<?=$idChampionnat?>"><h2 style="text-align: center;"><?php echo $nomChampionnat." ". $saison?></h2></a>
+                            
+
+                        <?php
+                        }
+                        ?>
+                            
+                        <?php
+                        }else{
+                        ?>
+                            <a href="/infoChampionnat?idChampionnat=<?=$idChampionnat?>"><h2 style="text-align: center;"><?php echo $nomChampionnat." ". $saison?></h2></a>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                    
+                    <br></br>
+
+                <?php
+                    }   
+                }
+                ?>
+
         
     </div>
     <!-- footer section starts -->

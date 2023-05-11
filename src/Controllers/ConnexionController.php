@@ -29,6 +29,7 @@ class ConnexionController
 
                 if($result)
                 {
+                    // Test si le mot de passe est le même que celui de la base de donnéer grâce à la fonction password_verify
                     if(password_verify($mdp,$result['motDePasse']))
                     {
                         $user = UserModel::takeUserByEmail($email);
@@ -45,6 +46,7 @@ class ConnexionController
                             }
                         }
 
+                        // Enregistrement des infos de l'utilisateurs en session
                         $_SESSION['email'] = $email;
                         $_SESSION['photoProfil'] = $user['photo'];
                         $_SESSION['photoBaniere'] = $user['baniere'];
@@ -65,7 +67,7 @@ class ConnexionController
                     $error = "Le mot de passe et/ou l'email ne sont pas bons";
                 }
             }else{
-                $error = "Tous les champs ne sont pas rensigné";
+                $error = "Tous les champs ne sont pas renseignés";
             }
         }
 

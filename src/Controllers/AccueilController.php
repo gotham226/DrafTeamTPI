@@ -20,16 +20,13 @@ class AccueilController
         if(isset($_SESSION['idEquipe']))
         {
             $equipe = UserModel::takeAllPeopleByIdEquipe($_SESSION['idEquipe']);
+            $evenements = EventModel::selectNextFiveEvent($_SESSION['idEquipe']);
         }
 
-        $evenements = EventModel::selectNextFiveEvent();
-
-        
-
-        
         require_once('../src/Views/accueil.php');
     }
 
+    // Fonction qui renvoie un format de date sous la forme :  Mardi 12 mai 2023 à 20:30
     public function formatDate($date) {
         $jourSemaine = array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi');
         $mois = array('', 'janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');

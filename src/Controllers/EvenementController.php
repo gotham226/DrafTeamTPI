@@ -60,9 +60,25 @@ class EvenementController
 
         $type = TypeModel::selectTypeById($evenement['idType'])['type'];
 
+        $domicile = filter_input(INPUT_POST, 'domicile', FILTER_SANITIZE_NUMBER_INT);
+        $exterieur = filter_input(INPUT_POST, 'exterieur', FILTER_SANITIZE_NUMBER_INT);
+
+        if(isset($_POST['validerEnregistrer']))
+        {
+            if($domicile != '' && $exterieur !='')
+            {
+                $resultat = $domicile." - ". $exterieur;
+                EventModel::setScore($_GET['idEvenement'], $resultat);
+            }
+            else{
+                $error = "Tous les champs ne sont pas renseignés";
+            }
+        }
+
 
         if(isset($_FILES['image']['name']) !="")
         {
+            // Test que la taille ne dépasse pas le maximum autoriser par le serveur 
             if($_FILES['image']['size']<= 3000000){
             
                 $typeMedia = $_FILES['image']['type'];
@@ -78,6 +94,7 @@ class EvenementController
                 // Test si le fichier est bien une image
                 if($typeMedia=="image/png" || $typeMedia=="image/jpeg" || $typeMedia=="image/jpg"){
                     $dateDuPost = date( "Y-m-d H:i:s");
+                    // Créer un nom de fichier unique
                     $nom = $_FILES['image']['name'].$dateDuPost.".".$extensionsFichier;
                     $canUpload = true;
                 }else{
@@ -102,10 +119,14 @@ class EvenementController
             header('Location: /evenement?idEvenement='.$_GET['idEvenement']);
             exit;
         }
+
+        $evenement = EventModel::selectEventById($_GET['idEvenement']);
+        
             
         require_once('../src/Views/evenement.php');
     }
 
+    // Fonction qi renvoie la durée en fonction d'une date de début et de fin 
     public function calculDuree($debut, $fin)
     {
         $timestamp1 = strtotime($debut);
@@ -119,6 +140,8 @@ class EvenementController
         return $heures. "H" . $minutes;
 
     }
+
+    
 
 
 }

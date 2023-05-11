@@ -26,7 +26,7 @@ class CreateEventController
 
         $types = TypeModel::selectAllType();
         $lieux = LieuModel::selectAllLocation();
-
+        
         $nom = filter_input(INPUT_POST, 'nomEvent', FILTER_SANITIZE_STRING);
         $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
         $type = filter_input(INPUT_POST, 'type', FILTER_SANITIZE_STRING);

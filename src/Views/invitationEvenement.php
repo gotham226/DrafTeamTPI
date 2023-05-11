@@ -36,7 +36,7 @@ use drafteam\Models\PosteModel;
 
     <div id="creationProfil" style="width: 100%;">
     <?php
-    if($poste == "Joueurs")
+    if($poste == "Joueur")
     {
         echo "<img src=\"./assets/img/milieu@3x.png\" style=\"width:25%; margin-left:36%; margin-top:7%; \"alt=\"\">";
     }
@@ -95,7 +95,7 @@ use drafteam\Models\PosteModel;
 
             <?php 
     } else{
-        echo "<h1 style=\"text-align:center; font-size:400%;\">Tous les joueurs sont déjà invités</h1>";
+        echo "<h1 style=\"text-align:center; font-size:400%;\">Tous les ".$poste."s sont déjà invités</h1>";
     }
         ?>
     </div>

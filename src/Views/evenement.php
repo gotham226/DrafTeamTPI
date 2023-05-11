@@ -1,5 +1,6 @@
 <?php
 use drafteam\Models\PosteModel;
+use drafteam\Models\EventModel;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -33,7 +34,7 @@ use drafteam\Models\PosteModel;
     
     <div style="width:100%; margin-top: 8%;" >
     <?php
-    if($invited)
+    if($invited && $evenement['heureFin'] > date('Y-m-d H:i:s'))
     {
         if($infoParticipation['present'] == 1)
         {
@@ -74,11 +75,47 @@ use drafteam\Models\PosteModel;
                 if(isset($_SESSION['entraineur']) == true)
                 {
                 ?>
-                <div style="text-align:center;"> <a href="modifierEvenement?idEvenement=<?=$_GET['idEvenement']?>" style="color: white;"> <button  style=" color: blue; background-color: #0a78df00; border: none;" class="material-icons button edit">edit</button> </a>
+                <div style="text-align:center; margin-bottom:2%;" > <a href="modifierEvenement?idEvenement=<?=$_GET['idEvenement']?>" style="color: white;"> <button  style=" color: blue; background-color: #0a78df00; border: none;" class="material-icons button edit">edit</button> </a>
                     <a href="deleteEvenement?idEvenement=<?=$_GET['idEvenement']?>"> <button  style=" color: red; background-color: #0a78df00; border: none;"  class="material-icons button delete">delete</button> </a>
                     </div>
-                    
+
                     <?php 
+                    if($evenement['heureFin'] < date('Y-m-d H:i:s') && $type == "Match")
+                    {
+                        if($evenement['resultat'] === null)
+                        {
+                            ?>
+                                <h1 class="size3 bold" style="text-align: center;margin-top: 2%;">Score du match :</h1>
+                                    <h1 class="size2 bold" style="text-align: center;margin-top: 2%; color:red;"><?=$error?></h1>
+                                    <form method="post" style="margin-left:35%;">
+                                        <ul style="display: inline-flex; list-style:none;">
+                                            <li style="margin-right:4%;">
+                                                <label class="size2" >Domicile</label>
+                                                <input type="number" name="domicile" id="">
+                                            </li>
+
+                                            <li style="margin-top:12%;  margin-right:4%;">
+                                                <h1 class="size4 bold spacebottom1" style="text-align: center;margin-top: 2%;">-</h1>
+                                            </li>
+
+                                            <li>
+                                                <label class="size2">Visiteur</label>
+                                                <input type="number" name="exterieur" id="">
+                                            </li>
+                                        </ul>
+                                        <button type="submit" name="validerEnregistrer"style="margin-left:40%;" class="btn bg-purple wallet">Valider</button> 
+                                    </form>
+                            <?php
+                        }else{
+                            echo "<h1 class=\"size2 bold\" style=\"text-align: center;margin-top: 2%; \">Score du match: <br>".$evenement['resultat']."</h1>";
+                            ?>
+                                <div style="text-align:center; margin-bottom:2%;"> <a href="modifierScore?idEvenement=<?=$_GET['idEvenement']?>" style="color: white;"> <button  style=" color: blue; background-color: #0a78df00; border: none;" class="material-icons button edit">edit</button> </a>
+                                </div>
+                            <?php
+                        }
+                    
+                    }
+
                     if($evenement['image'] != null && $evenement['image'] != '')
                     { 
                     ?>
@@ -92,6 +129,8 @@ use drafteam\Models\PosteModel;
                         <form id="upload-form" method="post" enctype="multipart/form-data" style="margin: auto;">
                             <input type="file" name="image" id="image" style="display: none;">
                             <button type="submit" id="upload-button" class="btn bg-purple size2 white" name="ajoutImage" disabled>Ajouter l'image</button>
+                            <br>
+                            <a class="size2"href="https://www.demivolee.com/creez-votre-compo/outil-de-creation-de-composition-dequipe/" style="color: grey;">Cliquez ici pour faire ses propres compos ! </a>
                         </form>
                     <?php
                     }
@@ -158,16 +197,37 @@ use drafteam\Models\PosteModel;
                     <div class="container spacer5 ta-center bg-purple" style="background-image: url('./assets/<?php if($joueur['baniere'] == null){echo "img/fondBlanc.png";}else{echo "image/".$joueur['baniere'];} ?>'); width: 70%; background-size: cover;">
                     
                         <ul style="display: inline-flex; list-style: none; width:100%;height:100%;">
-                            <li style="width:40%; margin-top: 2%;"><img style="width: 75%; height:96%; " class="photoProfil " src="./assets/<?php if($joueur['photo'] == null){echo "img/profileIcon.png";}else{echo "image/".$joueur['photo'];} ?>"></li>
-                            <li style="width:45%; margin-left: 2%; margin-top: 2%; margin-right:12%;"><h4  style="font-size: 75%;text-align: center;border-radius: 8px; background-color:white; width:100%; color: black;"><?php if($joueur['prenom'] == null){echo $joueur['email'];}else{echo $joueur['prenom']."<br>".$joueur['nom']; }?><br><?php echo PosteModel::selectPosteById($joueur['idPoste'])['poste'];?></h4></li>
+                            <li style="width:35%; margin-top: 2%;"><img style="width: 75%; height:96%; " class="photoProfil " src="./assets/<?php if($joueur['photo'] == null){echo "img/profileIcon.png";}else{echo "image/".$joueur['photo'];} ?>"></li>
+                            <li style="width:40%; margin-left: 2%; margin-top: 2%; margin-right:12%;"><h4  style="font-size: 75%;text-align: center;border-radius: 8px; background-color:white; width:100%; color: black;"><?php if($joueur['prenom'] == null){echo explode("@", $joueur['email'])[0];}else{echo $joueur['prenom']."<br>".$joueur['nom']; }?><br><?php echo PosteModel::selectPosteById($joueur['idPoste'])['poste'];?></h4></li>
                             <?php
                             if(isset($_SESSION['entraineur']) == true)
                             {
+                                $infoJoueurInviter = EventModel::checkIfImInvited($joueur['idSportif'], $_GET['idEvenement']);
+                                
+                                if($infoJoueurInviter['present'] === 1)
+                                {
                             ?>
+                                <li style=" margin-top:10%;"><i class="fa fa-check" style="color: #90EE90; font-size: 150%;"></i></li>
                                 
                                 
                             <?php
-                            }?>
+                                }else if($infoJoueurInviter['present'] === 0){
+                                    
+                                ?>
+
+                                    <li style=" margin-top:8%;"><i class="fa fa-times" style="color: red; font-size: 150%;"></i> <br><a href="/affichageCommentaire?commentaire=<?=$infoJoueurInviter['commentaire']?>" ><i class="fa fa-comment" style="color:red;"></i></a></li>
+                                    
+                                    
+                                <?php  
+                                }else{
+                                    ?>
+
+                                    <li style=" margin-top:10%;"><i class="fa fa-clock" style="color: orange; font-size: 150%;"></i></li>
+                                    
+                                <?php  
+                                }
+                            }
+                            ?>
                         </ul>
                         <br>
                 
@@ -196,7 +256,6 @@ use drafteam\Models\PosteModel;
                     </a>
                     
                     <br>
-                <br>
                 <?php
                 }
                 foreach ($monStaffInviter as $staff)
@@ -206,15 +265,32 @@ use drafteam\Models\PosteModel;
                     <div class="container spacer5 ta-center bg-purple" style="background-image: url('./assets/<?php if($staff['baniere'] == null){echo "img/fondBlanc.png";}else{echo "image/".$staff['baniere'];} ?>'); width: 70%; background-size: cover;">
                     
                         <ul style="display: inline-flex; list-style: none; width:100%;height:100%;">
-                            <li style="width:40%; margin-top: 2%;"><img style="width: 75%; height:96%; " class="photoProfil " src="./assets/<?php if($staff['photo'] == null){echo "img/profileIcon.png";}else{echo "image/".$staff['photo'];} ?>"></li>
-                            <li style="width:55%; margin-left: 10%; margin-top: 2%; margin-right:5%;"><h4  style="font-size: 80%;text-align: center; color:black; border-radius: 8px; background-color:white;"><?php if($staff['prenom'] == null){echo $staff['email'];}else{echo $staff['prenom']."<br>".$staff['nom']; }?><br><?php echo PosteModel::selectPosteById($staff['idPoste'])['poste'];?></h4></li>
+                            <li style="width:35%; margin-top: 2%;"><img style="width: 75%; height:96%; " class="photoProfil " src="./assets/<?php if($staff['photo'] == null){echo "img/profileIcon.png";}else{echo "image/".$staff['photo'];} ?>"></li>
+                            <li style="width:40%; margin-left: 2%; margin-top: 2%; margin-right:12%;"><h4  style="font-size: 80%;text-align: center; color:black; border-radius: 8px; background-color:white;"><?php if($staff['prenom'] == null){echo explode("@", $staff['email'])[0] ;}else{echo $staff['prenom']."<br>".$staff['nom']; }?><br><?php echo PosteModel::selectPosteById($staff['idPoste'])['poste'];?></h4></li>
                             <?php
                             if(isset($_SESSION['entraineur']) == true)
                             {
+                                $infoStaffInviter = EventModel::checkIfImInvited($staff['idSportif'], $_GET['idEvenement']);
+                                if($infoStaffInviter['present'] === 1)
+                                {
                             ?>
-                                
+                                <li style=" margin-top:10%;"><i class="fa fa-check" style="color: #90EE90; font-size: 150%;"></i></li>
                                 
                             <?php
+                                }else if($infoStaffInviter['present'] === 0){
+                                ?>
+
+                                    <li style=" margin-top:3%;margin-bottom:6%; border-radius: 8px;"><i class="fa fa-times" style="color: red; font-size: 150%;"></i> <br><a href="/affichageCommentaire?commentaire=<?=$infoStaffInviter['commentaire']?>" ><i class="fa fa-comment" style="color:red;"></i></a></li>
+                                    
+                                    
+                                <?php  
+                                }else{
+                                    ?>
+                                    <li style=" margin-top:10%;"><i class="fa fa-clock" style="color: orange; font-size: 150%;"></i></li>
+                                    
+                                    
+                                <?php  
+                                }
                             }?>
                         </ul>
                             

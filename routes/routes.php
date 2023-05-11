@@ -1,4 +1,10 @@
 <?php
+/**
+ * Auteur: Gabriel Martin
+ * Date: 02.05.2023
+ * Description: Fichier de route pour la redirection de chaque url
+ * Version 1.0
+ */
 
 use Pecee\SimpleRouter\SimpleRouter as Router;
 
@@ -29,6 +35,10 @@ use drafteam\Controllers\UploadController;
 use drafteam\Controllers\ModifierEvenementController;
 use drafteam\Controllers\InvitationEvenementController;
 use drafteam\Controllers\JustifierAbsenceController;
+use drafteam\Controllers\AffichageCommentaireController;
+use drafteam\Controllers\ModifierScoreController;
+use drafteam\Controllers\RejoindreChampionnatController;
+
 
 
 Router::form('/', [AccueilController::class, 'accueil']);
@@ -59,3 +69,6 @@ Router::form('/upload', [UploadController::class, 'upload']);
 Router::form('/modifierEvenement', [ModifierEvenementController::class, 'modifierEvenement']);
 Router::form('/invitation', [InvitationEvenementController::class, 'invitationEvenement']);
 Router::form('/justification', [JustifierAbsenceController::class, 'justification']);
+Router::form('/affichageCommentaire', [AffichageCommentaireController::class, 'affichageCommentaire']);
+Router::form('/modifierScore', [ModifierScoreController::class, 'modifierScore']);
+Router::form('/rejoindreChampionnat', [RejoindreChampionnatController::class, 'rejoindreChampionnat']);

@@ -23,11 +23,16 @@ class ChampionnatController
         
 
         $championnats = ChampionnatModel::selectAllChampionnatFromIdCoach($_SESSION['idSportif']);
+        $idChampionnatActif = "";
 
-        $idChampionnatActif = ChampionnatModel::isActive();
-        
+        if(isset($_SESSION['idEquipe']))
+        {
+            $idChampionnatActif = ChampionnatModel::isActive($_SESSION['idEquipe']);
+        }
 
         $championnatsActif = ChampionnatModel::selectChampionnatByID($idChampionnatActif);
+
+        $autreChampionnats = ChampionnatModel::selectOthersChampionnat($_SESSION['idSportif']);
 
 
         

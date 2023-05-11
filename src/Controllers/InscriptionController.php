@@ -38,6 +38,7 @@ class InscriptionController
                     // Test si l'email est déjà utilisé
                     if(UserModel::checkIfEmailExist($email) != ""){
 
+                        // Test que la taille ne dépasse pas le maximum autoriser par le serveur 
                         if($_FILES['baniere']['size']<= 3000000 && $_FILES['profil']['size'] <= 3000000  ){
                     
                             $typeMediaProfil = $_FILES['profil']['type'];
@@ -59,6 +60,7 @@ class InscriptionController
                             // Test si le fichier est bien une image
                             if($typeMediaProfil=="image/png" || $typeMediaProfil=="image/jpeg" || $typeMediaProfil=="image/jpg"){
                                 $dateDuPost = date( "Y-m-d H:i:s");
+                                // Créer un nom de fichier unique
                                 $nomImageProfil = $_FILES['profil']['name'].$dateDuPost.".".$extensionsFichierProfil;
                                 $canUploadProfil = true;
                             }else{
@@ -69,6 +71,7 @@ class InscriptionController
                             // Test si le fichier est bien une image
                             if($typeMediaBaniere=="image/png" || $typeMediaBaniere=="image/jpeg" || $typeMediaBaniere=="image/jpg"){
                                 $dateDuPost = date( "Y-m-d H:i:s");
+                                // Créer un nom de fichier unique
                                 $nomImageBaniere = $_FILES['baniere']['name'].$dateDuPost.".".$extensionsFichierBaniere;
                                 $canUploadBaniere = true;
                             }else{
@@ -82,7 +85,7 @@ class InscriptionController
                             $options = [
                                 'cost' => 10,
                             ];
-                            //* hash le mot de passe en BCRYPT 
+                            // Hash le mot de passe en BCRYPT 
                             $hashPassword = password_hash($mdp1, PASSWORD_BCRYPT, $options);
 
                             $nomImageProfil = str_replace(' ', '', $nomImageProfil);
@@ -93,7 +96,7 @@ class InscriptionController
                                 {
                                     if(UserModel::registerUser($nom, $prenom, $email, $hashPassword, $numTel, $dateNaissance, $nomImageProfil, $nomImageBaniere, 1, null)){
                                 
-                                        
+                                        // Enregistre en session les informations de l'entraineur
                                         $_SESSION['email'] = $email;
                                         $_SESSION['entraineur'] = true;
                                         $_SESSION['photoProfil'] = $nomImageProfil;

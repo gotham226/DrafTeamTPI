@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    console.log(calendar);
 
     // Définition de la langue du calendrier en français
     calendar.setOption('locale', 'fr');
@@ -46,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
         var event = info.event;
         // Récupération de l'identifiant de l'événement cliqué
         var idEvent = event['extendedProps']['publicId'];
-        console.log(event);
         // Redirection vers la page d'affichage de l'événement en passant l'identifiant en paramètre
         window.location.href = '/evenement?idEvenement=' + idEvent;
     });

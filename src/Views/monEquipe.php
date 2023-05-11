@@ -153,7 +153,6 @@ use drafteam\Models\PosteModel;
                         </div>
                     </a>
                     
-                    <br>
                 <br>
                 <?php
                 }
