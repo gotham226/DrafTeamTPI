@@ -1,4 +1,10 @@
 <?php
+/**
+ * Auteur: Gabriel Martin
+ * Date: 09.05.2023
+ * Description: Page pour la vue des événements
+ * Version 1.0
+ */
 use drafteam\Models\PosteModel;
 use drafteam\Models\EventModel;
 ?>
@@ -120,6 +126,13 @@ use drafteam\Models\EventModel;
                     { 
                     ?>
                         <img src="./assets/image/<?=$evenement['image']?>" style="width:30%; margin-left:35%;" alt="">
+                        
+                            <div style="margin-left:38.3%; margin-top: 1%;">
+                            <form method="post">
+                                <button type="submit" name="deleteImg" style=" color: red; background-color: #0a78df00; border: none;" class="material-icons button delete">delete</button>
+                            </form>
+                            </div>
+                            
                     <?php
                     }else{
                     ?>
@@ -141,6 +154,7 @@ use drafteam\Models\EventModel;
                     ?>
                         <img src="./assets/image/<?=$evenement['image']?>" style="width:30%; margin-left:35%;" alt="">
                     <?php
+                        
                     }
                 }
                 ?>
@@ -240,7 +254,7 @@ use drafteam\Models\EventModel;
 
             <li style="width:20%; font-size:20px;">
                 <img src="./assets/img/entrainement2@3x.png" style="width:100%; "alt="">
-                <h1 style="text-align:center;">Staff invités</h1>
+                <h1 style="text-align:center;">Staffs invités</h1>
                 <br>
                 <br>
                 <?php
@@ -307,63 +321,7 @@ use drafteam\Models\EventModel;
 
 
     
-
-    <script>
-        let dropzone = document.getElementById("dropzone");
-        let uploadButton = document.getElementById("upload-button");
-        let filename = document.getElementById("filename");
-        let input = document.getElementById("image");
-
-        // Ouvrir la fenêtre de sélection de fichiers en cliquant sur le dropzone
-        dropzone.addEventListener("click", function() {
-            input.click();
-        });
-
-        // Empêcher le comportement par défaut du navigateur lorsqu'on dépose un fichier
-        dropzone.addEventListener("dragover", function(event) {
-            event.preventDefault();
-            dropzone.style.backgroundColor = "lightgray";
-        });
-
-        dropzone.addEventListener("dragleave", function(event) {
-            event.preventDefault();
-            dropzone.style.backgroundColor = "";
-        });
-
-        // Gérer la sélection de fichiers
-        input.addEventListener("change", function() {
-            let file = input.files[0];
-            if(file && file.type.match(/image.*/)) {
-                // Ajouter le code pour traiter l'image ici
-                filename.innerText = file.name;
-                uploadButton.disabled = false;
-            }
-        });
-
-        // Gérer le dépôt de fichiers
-        dropzone.addEventListener("drop", function(event) {
-            event.preventDefault();
-            dropzone.style.backgroundColor = "";
-            let files = event.dataTransfer.files;
-            for(let i = 0; i < files.length; i++) {
-                let file = files[i];
-                if(file.type.match(/image.*/)) {
-                    // Ajouter le code pour traiter l'image ici
-                    filename.innerText = file.name;
-                    input.files = files;
-                    uploadButton.disabled = false;
-                }
-            }
-        });
-
-        // Gérer le clic sur le bouton d'upload
-        uploadButton.addEventListener("click", function(event) {
-            event.preventDefault();
-            document.getElementById("upload-form").submit();
-        });
-    </script>
-
-    
+    <script src="./assets/js/dragAndDrop.js"></script>    
     <!-- footer section starts -->
     <footer class="spacer10">
         <div class="container row jc-between flexcol-s ta-center-s ">

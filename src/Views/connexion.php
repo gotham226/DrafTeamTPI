@@ -1,3 +1,9 @@
+<!-- /**
+ * Auteur: Gabriel Martin
+ * Date: 03.05.2023
+ * Description: Page pour la vue de la connexion
+ * Version 1.0
+ */ -->
 <!DOCTYPE html>
 <html lang="fr">
 

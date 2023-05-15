@@ -1,3 +1,9 @@
+<!-- /**
+ * Auteur: Gabriel Martin
+ * Date: 09.05.2023
+ * Description: Page pour la vue de la suppression d'un événement
+ * Version 1.0
+ */ -->
 <!DOCTYPE html>
 <html lang="fr">
 

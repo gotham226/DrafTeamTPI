@@ -1,6 +1,10 @@
-<!-- Lien template de base : https://github.com/dzarrorn/NFTwebsite_html-sass -->
 <?php
-
+/**
+* Auteur: Gabriel Martin
+* Date: 03.05.2023
+* Description: Page pour la vue de l'accueil
+* Version 1.0
+*/
 use drafteam\Models\PosteModel;
 use drafteam\Controllers\AccueilController;
 use drafteam\Models\LieuModel;
@@ -72,7 +76,11 @@ use drafteam\Models\TypeModel;
         
         <!-- Evenement a venir -->
         <?php
-            if(isset($_SESSION['email']) != "" && isset($_SESSION['idEquipe']) ){
+            if(isset($_SESSION['email']) != ""){
+                if(isset($_SESSION['idEquipe']))
+                {
+
+                
                 ?>  
                     <section class="collections spacer10" id="event">
                         <div class="container">
@@ -118,6 +126,7 @@ use drafteam\Models\TypeModel;
                                         }
                                     
                                     }
+                                }
                                     ?>
                                     
                                     
@@ -157,7 +166,7 @@ use drafteam\Models\TypeModel;
 
         <section class="creator spacer10" id="featured">
         <div class="container">
-            <h1 class="bold size4 ta-center">Equipe</h1>
+            <h1 class="bold size4 ta-center">Équipe</h1>
             <p class="spacebottom3 halfwhite size2 ta-center">
                 Les membres de votre équipe
             </p>
@@ -222,7 +231,7 @@ use drafteam\Models\TypeModel;
                     }
                 ?>
                 
-                <h2 id="nomUtilisateurProfil">Nom de l'utilisateur</h2>
+                <h2 id="nomUtilisateurProfil"><?=$_SESSION['email']?></h2>
                 <?php
                 if(isset($_SESSION['email']) != null){
 

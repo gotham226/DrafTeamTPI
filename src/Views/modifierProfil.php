@@ -1,6 +1,11 @@
+<!-- /**
+ * Auteur: Gabriel Martin
+ * Date: 08.05.2023
+ * Description: Page pour la vue de de la modification du profil
+ * Version 1.0
+ */ -->
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -104,6 +109,7 @@
     
     <div id="modifierProfil">
         <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 20%;">Modifier mot de passe</h1>
+        <h2 style="color:green; text-align: center;"><?=$messageMdp?></h2>
         <h2 style="color:red; text-align: center;"><?=$errorMdp?></h2>
         <form  method="post" style="margin: auto;" enctype="multipart/form-data">
 
@@ -134,18 +140,27 @@
             <label style="font-size: 20px; font-weight: bold;">Votre email</label>
             <input type="email" name="email" placeholder="drafteam@mail.com" value="<?=$sportif['email']?>">
             <br><br>
-            
+            <?php
+            if(!isset($_SESSION['entraineur']))
+            {
+            ?>
+                <label style="font-size: 20px; font-weight: bold;">Numéro de maillot</label>
+                <input type="number" name="numeroTel"  max="99" min="1">
+                <br><br>
+            <?php
+            }
+            ?>
+
             <label style="font-size: 20px; font-weight: bold;">Numéro de téléphone</label>
-            <input type="number" name="numeroTel" placeholder="079 123 45 67" value="<?=$sportif['telephone']?>">
-            <br><br>
+                <input type="number" name="numeroTel" placeholder="079 123 45 67" value="<?=$sportif['telephone']?>">
+                <br><br>
+                
 
             <label style="font-size: 20px; font-weight: bold;">Votre date de naissance</label>
             <input id="date" type="date" name="dateNaissance" value="<?=$sportif['dateNaissance']?>">
             <br><br>
 
-            <label style="font-size: 20px; font-weight: bold;">Numéro de maillot</label>
-            <input type="number" name="numeroTel"  max="99" min="1">
-            <br><br>
+            
 
 
             <label style="font-size: 20px">Modifiez votre photo de profil</label>

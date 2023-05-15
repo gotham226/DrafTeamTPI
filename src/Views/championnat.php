@@ -1,3 +1,9 @@
+<!-- /**
+ * Auteur: Gabriel Martin
+ * Date: 02.05.2023
+ * Description: Page pour la vue de l'affichage des championnats
+ * Version 1.0
+ */ -->
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -34,7 +40,7 @@
 
     <div>
         
-        <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 6%; margin-bottom: 3%;">Gestion championnats</h1>
+        <h1 class="size5 bold spacebottom1" style="text-align: center;margin-top: 6%; margin-bottom: 3%;">Championnats</h1>
         <?php
         if(isset($_SESSION['entraineur']))
         {

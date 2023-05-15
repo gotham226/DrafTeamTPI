@@ -1,6 +1,6 @@
 <?php
 /**
- * Contient les paramètre pour la base de donnée
+ * Contient les paramètres pour la base de donnée
  * 
  * Gabriel Martin
  */

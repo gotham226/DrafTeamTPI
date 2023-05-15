@@ -2,7 +2,7 @@
 /**
  * Auteur: Gabriel Martin
  * Date: 09.05.2023
- * Description: Page contenant toute les requêtes concernant les types d'événements
+ * Description: Page contenant toutes les requêtes concernant les types d'événements
  * Version 1.0
  */
 

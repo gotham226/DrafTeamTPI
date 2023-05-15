@@ -22,11 +22,7 @@ class InfoChampionnatController
             exit;
         }
 
-        if(isset($_SESSION['idEquipe']) == null)
-        {
-            header('Location: /');
-            exit;
-        }
+        
         
         $championnat = ChampionnatModel::selectChampionnatByID($_GET['idChampionnat']);
 

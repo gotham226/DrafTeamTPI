@@ -2,7 +2,7 @@
 /**
  * Auteur: Gabriel Martin
  * Date: 08.05.2023
- * Description: Page contenant toute les requêtes concernant l'agenda
+ * Description: Page contenant toutes les requêtes concernant l'agenda
  * Version 1.0
  */
 

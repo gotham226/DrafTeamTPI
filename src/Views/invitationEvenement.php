@@ -1,4 +1,10 @@
 <?php
+/**
+ * Auteur: Gabriel Martin
+ * Date: 10.05.2023
+ * Description: Page pour la vue de l'invitation aux événements
+ * Version 1.0
+ */
 use drafteam\Models\PosteModel;
 ?>
 
@@ -111,20 +117,7 @@ use drafteam\Models\PosteModel;
 
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <!-- custom js file link -->
-    <script>
-        function toggleCheckboxes() {
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].checked = !checkboxes[i].checked;
-        }
-        var btnToggle = document.getElementById('btn-toggle');
-        if (btnToggle.innerHTML === 'Tout cocher') {
-            btnToggle.innerHTML = 'Tout décocher';
-        } else {
-            btnToggle.innerHTML = 'Tout cocher';
-        }
-        }
-    </script>
+    <script src="./assets/js/toggleButton.js"></script>
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/affichage.js"></script>
 

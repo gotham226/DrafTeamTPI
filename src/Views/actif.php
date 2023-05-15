@@ -1,3 +1,9 @@
+<!-- /**
+ * Auteur: Gabriel Martin
+ * Date: 10.05.2023
+ * Description: Page pour la vue de l'activation d'un championat
+ * Version 1.0
+ */ -->
 <!DOCTYPE html>
 <html lang="fr">
 

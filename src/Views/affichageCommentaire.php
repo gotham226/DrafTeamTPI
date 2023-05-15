@@ -1,3 +1,9 @@
+<!-- /**
+ * Auteur: Gabriel Martin
+ * Date: 11.05.2023
+ * Description: Page pour la vue de l'affichage des commentaires
+ * Version 1.0
+ */ -->
 <!DOCTYPE html>
 <html lang="fr">
 

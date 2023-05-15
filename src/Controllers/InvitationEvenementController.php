@@ -27,7 +27,7 @@ class InvitationEvenementController
         }
         if($_GET['poste'] == 'joueur')
         {
-            $mesJoueurs = UserModel::selectAllUninvitedPlayers($_GET['idEvenement']);
+            $mesJoueurs = UserModel::selectAllUninvitedPlayers($_GET['idEvenement'], $_SESSION['idEquipe']);
             $poste="Joueur";
         }else{
             $mesJoueurs = UserModel::selectAllUninvitedStaff($_GET['idEvenement'], $_SESSION['idEquipe']);

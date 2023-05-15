@@ -75,6 +75,11 @@ class EvenementController
             }
         }
 
+        if(isset($_POST['deleteImg']))
+        {
+            EventModel::deleteImgFromEvent($_GET['idEvenement']);
+        }
+
 
         if(isset($_FILES['image']['name']) !="")
         {

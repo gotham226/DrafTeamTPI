@@ -1,3 +1,10 @@
+/**
+ * Auteur: Gabriel Martin
+ * Date: 02.05.2023
+ * Description: Pages js avec toutes les fonctions concernant l'affichage
+ * Version 1.0
+ */
+
 //Declaration des variables
 let btnAjouter = document.getElementById("newEvent")
 let btnCreation = document.getElementById("btnCreation");
@@ -50,13 +57,13 @@ function TestBouton() {
     
 
 }
-//Changement du texte pour le bouton ajouter nft
+// Changement du texte pour le bouton ajouter événement
 function ChangeTextIn() {
     btnAjouter.innerText = "+";
     
 
 }
-//Changement du texte pour le bouton ajouter nft
+// Changement du texte pour le bouton ajouter événement
 function ChangeTextOut() {
     let widthBtn = btnAjouter.offsetWidth;
     if(widthBtn == 70){

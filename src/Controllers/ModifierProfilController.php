@@ -24,6 +24,7 @@ class ModifierProfilController
         $error="";
 
         $errorMdp="";
+        $messageMdp = "";
 
 
         $sportif = UserModel::selectUserById($_GET['idSportif']);
@@ -41,8 +42,32 @@ class ModifierProfilController
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $numTel = filter_input(INPUT_POST, 'numeroTel', FILTER_SANITIZE_NUMBER_INT);
         $dateNaissance = filter_input(INPUT_POST, 'dateNaissance', FILTER_SANITIZE_STRING);
-        $mdp1 = filter_input(INPUT_POST, 'mdp1', FILTER_SANITIZE_SPECIAL_CHARS);
-        $mdp2 = filter_input(INPUT_POST, 'mdp2', FILTER_SANITIZE_SPECIAL_CHARS);
+        $mdp1 = filter_input(INPUT_POST, 'ancienMdp', FILTER_SANITIZE_SPECIAL_CHARS);
+        $mdp2 = filter_input(INPUT_POST, 'nouveauMdp', FILTER_SANITIZE_SPECIAL_CHARS);
+        
+        if(isset($_POST['modifierMdp']))
+        {
+            if($mdp1 !="" && $mdp2 !="")
+            {
+                $result = UserModel::connexionCheck($_SESSION['email']);
+                
+                if(password_verify($mdp1,$result['motDePasse']))
+                {
+                    $options = [
+                        'cost' => 10,
+                    ];
+                    // Hash le mot de passe en BCRYPT 
+                    $hashPassword = password_hash($mdp2, PASSWORD_BCRYPT, $options);
+
+                    UserModel::UpdateMdpForAUser($_GET['idSportif'], $hashPassword);
+                    $messageMdp="Le mot de passe a bien été modifié.";
+                }else{
+                    $errorMdp = "Le mot de passe actuel n'est pas le bon";
+                }
+            }else{
+                $errorMdp = "Tous les champs ne sont pas renseignés";
+            }
+        }
 
 
         if(isset($_POST['modifierProfil']))
@@ -169,6 +194,7 @@ class ModifierProfilController
 
         require_once('../src/Views/modifierProfil.php');
     }
+
 
 }
 

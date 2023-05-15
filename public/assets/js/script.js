@@ -1,6 +1,11 @@
-// Sélectionne tous les boutons de filtres dans l' HTML avec la classe "filter"
+/**
+ * Auteur: Gabriel Martin
+ * Date: 02.05.2023
+ * Description: Page js pour le carousel de la page d'accueil 
+ * Version 1.0
+ */
+
 let filterBtn = document.querySelectorAll('.filter-buttons .filter')
-// Sélectionne tous les éléments dans l' HTML avec la classe "collect"
 let filterItem = document.querySelectorAll('.collections .box-card .collect')
 
 // Ajoute un gestionnaire d'événements sur chaque bouton de filtres

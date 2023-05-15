@@ -1,3 +1,9 @@
+<!-- /**
+ * Auteur: Gabriel Martin
+ * Date: 08.05.2023
+ * Description: Page pour la vue de la création d'événements
+ * Version 1.0
+ */ -->
 <!DOCTYPE html>
 <html lang="fr">
 

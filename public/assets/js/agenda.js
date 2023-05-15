@@ -1,4 +1,11 @@
-// Déclaration de la variable "calendar"
+/**
+ * Auteur: Gabriel Martin
+ * Date: 02.05.2023
+ * Description: Page js pour gérer l'agenda afficher sur la page agenda 
+ * Version 1.0
+ */
+
+
 var calendar;
 
 // Ajout d'un écouteur d'événement qui se déclenche lorsque le contenu du document est chargé
@@ -16,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         events: '/agendaEvent',// récupére les events 
         
         headerToolbar: { center: 'dayGridMonth,timeGridWeek' },// Affichage des boutons en haut du calendrier pour naviger de mois en mois ou semaine en semaine
-        views: { // Les différente vue :
+        views: { // Les différentes vues :
             dayGrid: {
             contentHeight: 1000
             },

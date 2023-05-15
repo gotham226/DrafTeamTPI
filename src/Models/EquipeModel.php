@@ -2,7 +2,7 @@
 /**
  * Auteur: Gabriel Martin
  * Date: 03.05.2023
- * Description: Page contenant toute les requêtes concernant les equipe
+ * Description: Page contenant toutes les requêtes concernant les equipe
  * Version 1.0
  */
 

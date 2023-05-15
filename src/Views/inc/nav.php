@@ -1,4 +1,9 @@
-
+<!-- /**
+ * Auteur: Gabriel Martin
+ * Date: 03.05.2023
+ * Description: Page pour la navbar
+ * Version 1.0
+ */ -->
 
 <div class="container" id="divTop">
         <a  href="/" style="width:15%;"><img src="./assets/img/DTtexteLight.png" href="index.php" style="width:100%;" alt=""></a>

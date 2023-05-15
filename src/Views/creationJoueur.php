@@ -1,3 +1,9 @@
+<!-- /**
+ * Auteur: Gabriel Martin
+ * Date: 04.05.2023
+ * Description: Page pour la vue de la création d'un sportif
+ * Version 1.0
+ */ -->
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -45,7 +51,7 @@
                 <button type="button" class="bg-purple" onclick="togglePassword()" style="margin-left:-63px; height:64px; border-radius:10px; background-color:white;"><img id="eye-icon"src="./assets/img/oeil.png" style="height:100%;" alt=""></button>
             </div>
             <br><br>
-
+            <label style="font-size: 20px; font-weight: bold;">Rôle</label>
             <select name="poste" style="border-radius: 8px;">
             <?php
             foreach ($postes as $poste) {
@@ -75,19 +81,7 @@
 
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <!-- custom js file link -->
-    <script>
-        function togglePassword() {
-            var x = document.getElementById("mdp");
-            var eyeIcon = document.getElementById("eye-icon");
-            if (x.type === "password") {
-                x.type = "text";
-                eyeIcon.src = "./assets/img/cacher.png";
-            } else {
-                x.type = "password";
-                eyeIcon.src = "./assets/img/oeil.png";
-            }
-        }
-    </script>
+    <script src=".assets/js/togglePassword.js"></script>
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/affichage.js"></script>
 

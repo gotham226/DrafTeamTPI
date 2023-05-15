@@ -2,7 +2,7 @@
 /**
  * Auteur: Gabriel Martin
  * Date: 04.05.2023
- * Description: Page contenant toute les requêtes concernant les utilisateurs
+ * Description: Page contenant toutes les requêtes concernant les utilisateurs
  * Version 1.0
  */
 
@@ -301,15 +301,16 @@ class UserModel
      * @param int $idEvenement ID de l'événement
      * @return array Un tableau associatif contenant les informations des joueurs non invités
     */
-    public static function selectAllUninvitedPlayers($idEvenement)
+    public static function selectAllUninvitedPlayers($idEvenement, $idEquipe)
     {
         $sql = "SELECT *
         FROM sportif
         LEFT JOIN poste ON sportif.idPoste = poste.idPoste
-        WHERE poste.staff = 0 AND poste.admin = 0 AND sportif.idSportif NOT IN (
+        WHERE poste.staff = 0 AND poste.admin = 0 AND sportif.idEquipe = ? AND sportif.idSportif NOT IN (
             SELECT idSportif FROM etre_present WHERE idEvenement = ?)";
 
         $data = [
+            $idEquipe,
             $idEvenement
         ];
         return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
@@ -337,5 +338,16 @@ class UserModel
         return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    public static function UpdateMdpForAUser($idSportif, $mdp)
+    {
+        $sql = "UPDATE sportif SET motDePasse = ? WHERE idSportif = ?";
+        $data=[
+            $mdp,
+            $idSportif
+        ];
+        
+        return database::dbRun($sql, $data);
+    }
 
 }

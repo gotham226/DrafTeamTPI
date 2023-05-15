@@ -2,7 +2,7 @@
 /**
  * Auteur: Gabriel Martin
  * Date: 08.05.2023
- * Description: Page contenant toute les requêtes concernant les événements
+ * Description: Page contenant toutes les requêtes concernant les événements
  * Version 1.0
  */
 
@@ -335,6 +335,19 @@ class EventModel
         ];
 
         return database::dbRun($sql, $data);
+    }
+
+    public static function deleteImgFromEvent($idEvenement)
+    {
+        unlink('./assets/image/'.EventModel::selectEventById($idEvenement)['image']);
+
+        $sql = "UPDATE evenement SET image = NULL WHERE idEvenement = ?";
+
+        $data = [
+            $idEvenement
+        ];
+        database::dbRun($sql, $data);
+
     }
 
     

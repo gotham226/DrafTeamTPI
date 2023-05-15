@@ -1,5 +1,9 @@
-
-
+<!-- /**
+ * Auteur: Gabriel Martin
+ * Date: 02.05.2023
+ * Description: Page pour la vue de la modification des championnats
+ * Version 1.0
+ */ -->
 <!DOCTYPE html>
 <html lang="fr">
 

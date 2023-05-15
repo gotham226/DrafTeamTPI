@@ -2,7 +2,7 @@
 /**
  * Auteur: Gabriel Martin
  * Date: 04.05.2023
- * Description: Page contenant toute les requêtes concernant les championnats
+ * Description: Page contenant toutes les requêtes concernant les championnats
  * Version 1.0
  */
 
