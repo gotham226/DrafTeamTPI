@@ -46,7 +46,8 @@ class UserModel
     */
     public static function registerUser($nom, $prenom, $email, $mdp, $numTel, $dateNaissance, $photoProfil, $photoBaniere, $idPost, $idEquipe)
     {
-        $sql = "INSERT INTO sportif(nom, prenom, dateNaissance, photo, email, motDePasse, telephone, idPoste, baniere, idEquipe) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        $sql = "INSERT INTO sportif(nom, prenom, dateNaissance, photo, email, motDePasse, telephone, idPoste, baniere, idEquipe) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         
         $data = [            
             $nom,             

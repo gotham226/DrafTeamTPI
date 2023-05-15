@@ -45,7 +45,7 @@
             <input type="text" name="email" placeholder="drafteam@mail.com">
             <br><br>
 
-            <label style="font-size: 20px; font-weight: bold;">Mot de passe</label>
+            <label style="font-size: 20px; font-weight: bold;">Mot de passe <button type="button" onclick="copyPassword()">Copier</button>  </label>
             <div style="display: flex; align-items: center;">
                 <input type="password" name="mdp" id="mdp" value="<?=$mdpGenerer?>" style="flex: 1;">
                 <button type="button" class="bg-purple" onclick="togglePassword()" style="margin-left:-63px; height:64px; border-radius:10px; background-color:white;"><img id="eye-icon"src="./assets/img/oeil.png" style="height:100%;" alt=""></button>
@@ -68,6 +68,7 @@
             
             <button type="submit" class="btn bg-purple size2 white" name="inscription">Créer sportif</button>
         </form>
+        
     </div>
     <!-- footer section starts -->
     <footer class="spacer10">
@@ -80,8 +81,38 @@
     <!-- footer section ends -->
 
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script>
+        function copyPassword() {
+        var passwordField = document.getElementById("mdp");
+        var password = passwordField.value;
+
+        // Créer un élément temporaire pour la copie du texte
+        var tempInput = document.createElement("input");
+        tempInput.value = password;
+        document.body.appendChild(tempInput);
+
+        // Sélectionner le contenu de l'élément temporaire
+        tempInput.select();
+        tempInput.setSelectionRange(0, 99999);
+
+        // Copier le contenu dans le presse-papier
+        document.execCommand("copy");
+
+        // Supprimer l'élément temporaire
+        document.body.removeChild(tempInput);
+
+        // Changer le texte du bouton après la copie
+        var button = document.getElementsByTagName("button")[1];
+        button.innerHTML = "Copié";
+
+        // Réinitialiser le bouton après 2 secondes
+        setTimeout(function() {
+            button.innerHTML = "Copier";
+        }, 2000);
+    }
+    </script>
     <!-- custom js file link -->
-    <script src=".assets/js/togglePassword.js"></script>
+    <script src="./assets/js/togglePassword.js"></script>
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/affichage.js"></script>
 

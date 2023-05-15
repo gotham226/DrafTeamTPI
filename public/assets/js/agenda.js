@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
         initialView: 'dayGridMonth',// Pour afficher la vue initial (par mois)
         events: '/agendaEvent',// récupére les events 
         
-        headerToolbar: { center: 'dayGridMonth,timeGridWeek' },// Affichage des boutons en haut du calendrier pour naviger de mois en mois ou semaine en semaine
+        // Affichage des boutons en haut du calendrier pour naviger de mois en mois ou semaine en semaine
+        headerToolbar: { center: 'dayGridMonth,timeGridWeek' },
         views: { // Les différentes vues :
             dayGrid: {
             contentHeight: 1000
