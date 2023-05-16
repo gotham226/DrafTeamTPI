@@ -39,9 +39,18 @@ class CreateEventController
             
             if($nom !="" && $description !="" && $type !="" && $lieu !="" && $debut !="" && $fin !="")
             {
-                EventModel::createNewEvent($nom, $description, $type, $lieu, $debut, $fin);
-                header("Location: /");
-                exit;
+                if($fin<$debut)
+                {
+                    $error = "La date de fin ne peut pas être avant la date de début";
+                }
+                else{
+                    EventModel::createNewEvent($nom, $description, $type, $lieu, $debut, $fin);
+                    header("Location: /");
+                    exit;
+                }
+                
+            }else{
+                $error = "Tous les champs ne sont pas renseignés";
             }
         }
         require_once('../src/Views/createEvent.php');

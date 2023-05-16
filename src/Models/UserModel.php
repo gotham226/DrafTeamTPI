@@ -339,7 +339,13 @@ class UserModel
         return database::dbRun($sql, $data)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
+    /**
+     * Met à jour le mot de passe d'un utilisateur spécifié.
+     *
+     * @param int $idSportif L'ID de l'utilisateur.
+     * @param string $mdp Le nouveau mot de passe.
+     * @return bool True si la mise à jour a été effectuée avec succès, sinon False.
+     */
     public static function UpdateMdpForAUser($idSportif, $mdp)
     {
         $sql = "UPDATE sportif SET motDePasse = ? WHERE idSportif = ?";

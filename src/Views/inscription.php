@@ -42,41 +42,41 @@
         <h2 style="color:red; text-align: center;"><?=$error?></h2>
         <form  method="post" style="margin: auto;" enctype="multipart/form-data">
 
-            <label style="font-size: 20px; font-weight: bold;">Votre nom</label>
+            <label style="font-size: 20px; font-weight: bold;">Votre nom *</label>
             <input type="text" name="nom" placeholder="Nom">
             <br><br>
 
-            <label style="font-size: 20px; font-weight: bold;">Votre prénom</label>
+            <label style="font-size: 20px; font-weight: bold;">Votre prénom *</label>
             <input type="text" name="prenom" placeholder="Prénom">
             <br><br>
 
-            <label style="font-size: 20px; font-weight: bold;">Votre email</label>
+            <label style="font-size: 20px; font-weight: bold;">Votre email *</label>
             <input type="email" name="email" placeholder="drafteam@mail.com">
             <br><br>
             
-            <label style="font-size: 20px; font-weight: bold;">Numéro de téléphone</label>
+            <label style="font-size: 20px; font-weight: bold;">Numéro de téléphone *</label>
             <input type="number" name="numeroTel" placeholder="079 123 45 67">
             <br><br>
 
-            <label style="font-size: 20px; font-weight: bold;">Votre date de naissance</label>
+            <label style="font-size: 20px; font-weight: bold;">Votre date de naissance *</label>
             <input id="date" type="date" name="dateNaissance" value="">
             <br><br>
 
-            <label style="font-size: 20px; font-weight: bold;">Votre mot de passe</label>
+            <label style="font-size: 20px; font-weight: bold;">Votre mot de passe *</label>
             <input type="password" name="mdp1" placeholder="*******">
             <br><br>
 
-            <label style="font-size: 20px; font-weight: bold;">Valider votre mot de passe</label>
+            <label style="font-size: 20px; font-weight: bold;">Validez votre mot de passe *</label>
             <input type="password" name="mdp2" placeholder="*******">
             <br><br>
 
-            <label style="font-size: 20px">Modifiez votre photo de profil</label>
+            <label style="font-size: 20px">Choisissez votre photo de profil *</label>
             <input type="file" name="profil" accept="image/png, image/jpeg, image/jpg" id="outputPhotoProfil"
                 onchange="LoadPhotoProfil(event)">
             <div id="imgUploadPhotoProfil"
                 style="width: 5vw;height: 5vw; background-size: cover;background-position: center; border-radius: 100%;">
             </div>
-            <label style="font-size: 20px">Modifiez votre bannière</label>
+            <label style="font-size: 20px">Choisissez votre bannière *</label>
             <input type="file" name="baniere" accept="image/png, image/jpeg, image/jpg" id="outputBanniere"
                 onchange="LoadBanniere(event)">
             <div id="imgUploadBanniere" alt="" style="width: 20vw;height: 7vw;">

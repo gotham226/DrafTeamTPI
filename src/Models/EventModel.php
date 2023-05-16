@@ -337,6 +337,12 @@ class EventModel
         return database::dbRun($sql, $data);
     }
 
+    /**
+     * Supprime l'image associée à un événement et met à jour le champ image de l'événement à NULL.
+     *
+     * @param int $idEvenement L'ID de l'événement.
+     * @return void
+     */
     public static function deleteImgFromEvent($idEvenement)
     {
         unlink('./assets/image/'.EventModel::selectEventById($idEvenement)['image']);

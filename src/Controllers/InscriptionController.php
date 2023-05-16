@@ -34,88 +34,94 @@ class InscriptionController
                 // Test si tout les champs sont renseigner
                 if($nom != "" && $prenom != "" && $email != "" && $numTel != "" && $dateNaissance != "" && $mdp1 != "" && $mdp2 != "" ){
                     
-                    
-                    // Test si l'email est déjà utilisé
-                    if(UserModel::checkIfEmailExist($email) != ""){
+                    if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
+                    {
+                        $error="L'email n'est pas valide";
+                    }
+                    else{
+                        // Test si l'email est déjà utilisé
+                        if(UserModel::checkIfEmailExist($email) != ""){
 
-                        // Test que la taille ne dépasse pas le maximum autoriser par le serveur 
-                        if($_FILES['baniere']['size']<= 3000000 && $_FILES['profil']['size'] <= 3000000  ){
-                    
-                            $typeMediaProfil = $_FILES['profil']['type'];
-                            $typeMediaBaniere = $_FILES['baniere']['type'];
-        
-                            $extensionsFichierProfil = substr(strrchr($_FILES['profil']['name'],'.'),1);
-                            $extensionsFichierBaniere = substr(strrchr($_FILES['baniere']['name'],'.'),1);
-                            
-        
-                            if($typeMediaProfil==""){
-                                $typeMediaProfil= "image/".$extensionsFichierProfil;
-                            }
-        
-                            if($typeMediaBaniere==""){
-                                $typeMediaBaniere= "image/".$extensionsFichierBaniere;
-                            }
-        
-                            
-                            // Test si le fichier est bien une image
-                            if($typeMediaProfil=="image/png" || $typeMediaProfil=="image/jpeg" || $typeMediaProfil=="image/jpg"){
-                                $dateDuPost = date( "Y-m-d H:i:s");
-                                // Créer un nom de fichier unique
-                                $nomImageProfil = $_FILES['profil']['name'].$dateDuPost.".".$extensionsFichierProfil;
-                                $canUploadProfil = true;
-                            }else{
-                                    $error = "Le fichier ".$_FILES['profil']['name']." n'est pas une image";
+                            // Test que la taille ne dépasse pas le maximum autoriser par le serveur 
+                            if($_FILES['baniere']['size']<= 3000000 && $_FILES['profil']['size'] <= 3000000  ){
+                        
+                                $typeMediaProfil = $_FILES['profil']['type'];
+                                $typeMediaBaniere = $_FILES['baniere']['type'];
+            
+                                $extensionsFichierProfil = substr(strrchr($_FILES['profil']['name'],'.'),1);
+                                $extensionsFichierBaniere = substr(strrchr($_FILES['baniere']['name'],'.'),1);
+                                
+            
+                                if($typeMediaProfil==""){
+                                    $typeMediaProfil= "image/".$extensionsFichierProfil;
+                                }
+            
+                                if($typeMediaBaniere==""){
+                                    $typeMediaBaniere= "image/".$extensionsFichierBaniere;
+                                }
+            
+                                
+                                // Test si le fichier est bien une image
+                                if($typeMediaProfil=="image/png" || $typeMediaProfil=="image/jpeg" || $typeMediaProfil=="image/jpg"){
+                                    $dateDuPost = date( "Y-m-d H:i:s");
+                                    // Créer un nom de fichier unique
+                                    $nomImageProfil = $_FILES['profil']['name'].$dateDuPost.".".$extensionsFichierProfil;
+                                    $canUploadProfil = true;
+                                }else{
+                                        $error = "Le fichier ".$_FILES['profil']['name']." n'est pas une image";
+                                        $canUploadBaniere = false;
+                                    }
+            
+                                // Test si le fichier est bien une image
+                                if($typeMediaBaniere=="image/png" || $typeMediaBaniere=="image/jpeg" || $typeMediaBaniere=="image/jpg"){
+                                    $dateDuPost = date( "Y-m-d H:i:s");
+                                    // Créer un nom de fichier unique
+                                    $nomImageBaniere = $_FILES['baniere']['name'].$dateDuPost.".".$extensionsFichierBaniere;
+                                    $canUploadBaniere = true;
+                                }else{
+                                    $error = "Le fichier ".$_FILES['baniere']['name']." n'est pas une image";
                                     $canUploadBaniere = false;
                                 }
-        
-                            // Test si le fichier est bien une image
-                            if($typeMediaBaniere=="image/png" || $typeMediaBaniere=="image/jpeg" || $typeMediaBaniere=="image/jpg"){
-                                $dateDuPost = date( "Y-m-d H:i:s");
-                                // Créer un nom de fichier unique
-                                $nomImageBaniere = $_FILES['baniere']['name'].$dateDuPost.".".$extensionsFichierBaniere;
-                                $canUploadBaniere = true;
-                            }else{
-                                $error = "Le fichier ".$_FILES['baniere']['name']." n'est pas une image";
-                                $canUploadBaniere = false;
                             }
-                        }
 
-                        if($mdp1 == $mdp2){
-                    
-                            $options = [
-                                'cost' => 10,
-                            ];
-                            // Hash le mot de passe en BCRYPT 
-                            $hashPassword = password_hash($mdp1, PASSWORD_BCRYPT, $options);
+                            if($mdp1 == $mdp2){
+                        
+                                $options = [
+                                    'cost' => 10,
+                                ];
+                                // Hash le mot de passe en BCRYPT 
+                                $hashPassword = password_hash($mdp1, PASSWORD_BCRYPT, $options);
 
-                            $nomImageProfil = str_replace(' ', '', $nomImageProfil);
-                            $nomImageBaniere = str_replace(' ', '', $nomImageBaniere);
+                                $nomImageProfil = str_replace(' ', '', $nomImageProfil);
+                                $nomImageBaniere = str_replace(' ', '', $nomImageBaniere);
 
-                            if($canUploadProfil == true && $canUploadBaniere == true){
-                                if(move_uploaded_file($_FILES['profil']['tmp_name'], "$uploads_dir/$nomImageProfil") && move_uploaded_file($_FILES['baniere']['tmp_name'], "$uploads_dir/$nomImageBaniere"))
-                                {
-                                    if(UserModel::registerUser($nom, $prenom, $email, $hashPassword, $numTel, $dateNaissance, $nomImageProfil, $nomImageBaniere, 1, null)){
-                                
-                                        // Enregistre en session les informations de l'entraineur
-                                        $_SESSION['email'] = $email;
-                                        $_SESSION['entraineur'] = true;
-                                        $_SESSION['photoProfil'] = $nomImageProfil;
-                                        $_SESSION['photoBaniere'] = $nomImageBaniere;
-                                        $_SESSION['idSportif'] = UserModel::takeUserByEmail($email)['idSportif'];
-                                        $_SESSION['idEquipe'] = UserModel::takeUserByEmail($email)['idEquipe'];
-                                        
-                                        header('Location: /');
-                                        exit;
-                                    }                                   
+                                if($canUploadProfil == true && $canUploadBaniere == true){
+                                    if(move_uploaded_file($_FILES['profil']['tmp_name'], "$uploads_dir/$nomImageProfil") && move_uploaded_file($_FILES['baniere']['tmp_name'], "$uploads_dir/$nomImageBaniere"))
+                                    {
+                                        if(UserModel::registerUser($nom, $prenom, $email, $hashPassword, $numTel, $dateNaissance, $nomImageProfil, $nomImageBaniere, 1, null)){
+                                    
+                                            // Enregistre en session les informations de l'entraineur
+                                            $_SESSION['email'] = $email;
+                                            $_SESSION['entraineur'] = true;
+                                            $_SESSION['photoProfil'] = $nomImageProfil;
+                                            $_SESSION['photoBaniere'] = $nomImageBaniere;
+                                            $_SESSION['idSportif'] = UserModel::takeUserByEmail($email)['idSportif'];
+                                            $_SESSION['idEquipe'] = UserModel::takeUserByEmail($email)['idEquipe'];
+                                            
+                                            header('Location: /');
+                                            exit;
+                                        }                                   
+                                    }
                                 }
-                            }
 
+                            }else{
+                                $error = "Les deux mot de passe ne sont pas semblable";
+                            }
                         }else{
-                            $error = "Les deux mot de passe ne sont pas semblable";
+                            $error = "Cet email est déjà utilisée";
                         }
-                    }else{
-                        $error = "Cet email est déjà utilisée";
                     }
+                    
                 }else{
                     $error = "Tout les champs ne sont pas renseigné";
                 }
