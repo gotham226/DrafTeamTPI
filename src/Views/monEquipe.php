@@ -122,7 +122,7 @@ use drafteam\Models\PosteModel;
                     
                         <ul style="display: inline-flex; list-style: none; width:100%;height:100%;">
                             <li style="width:40%; margin-top: 2%;"><img style="width: 75%; height:96%; " class="photoProfil " src="./assets/<?php if($joueur['photo'] == null){echo "img/profileIcon.png";}else{echo "image/".$joueur['photo'];} ?>"></li>
-                            <li style="width:45%; margin-left: 2%; margin-top: 2%; margin-right:12%;"><h4  style="font-size: 75%;text-align: center; color:black; border-radius: 8px; background-color:white; width:100%;"><?php if($joueur['prenom'] == null){echo $joueur['email'];}else{echo $joueur['prenom']."<br>".$joueur['nom']; }?><br><?php echo PosteModel::selectPosteById($joueur['idPoste'])['poste'];?></h4></li>
+                            <li style="width:55%; margin-left: 10%; margin-top: 2%; margin-right:5%;"><h4  style="font-size: 75%;text-align: center; color:black; border-radius: 8px; background-color:white; width:100%;"><?php if($joueur['prenom'] == null){echo $joueur['email'];}else{echo $joueur['prenom']."<br>".$joueur['nom']; }?><br><?php echo PosteModel::selectPosteById($joueur['idPoste'])['poste'];?></h4></li>
                             <?php
                             if(isset($_SESSION['entraineur']) == true)
                             {
@@ -171,7 +171,7 @@ use drafteam\Models\PosteModel;
                     
                         <ul style="display: inline-flex; list-style: none; width:100%;height:100%;">
                             <li style="width:40%; margin-top: 2%;"><img style="width: 75%; height:96%; " class="photoProfil " src="./assets/<?php if($staff['photo'] == null){echo "img/profileIcon.png";}else{echo "image/".$staff['photo'];} ?>"></li>
-                            <li style="width:55%; margin-left: 2%; margin-top: 2%; margin-right:5%;"><h4  style="font-size: 80%;text-align: center; color:black; border-radius: 8px; background-color:white;"><?php if($staff['prenom'] == null){echo $staff['email'];}else{echo $staff['prenom']."<br>".$staff['nom']; }?><br><?php echo PosteModel::selectPosteById($staff['idPoste'])['poste'];?></h4></li>
+                            <li style="width:55%; margin-left: 10%; margin-top: 2%; margin-right:5%;"><h4  style="font-size: 80%;text-align: center; color:black; border-radius: 8px; background-color:white;"><?php if($staff['prenom'] == null){echo $staff['email'];}else{echo $staff['prenom']."<br>".$staff['nom']; }?><br><?php echo PosteModel::selectPosteById($staff['idPoste'])['poste'];?></h4></li>
                             <?php
                             if(isset($_SESSION['entraineur']) == true)
                             {

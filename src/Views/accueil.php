@@ -177,7 +177,7 @@ use drafteam\Models\TypeModel;
                         ?>
                             <div class="col4 col5-md col7-s swiper-slide">
                                 <div class="card-creator bg-white10 ta-center" style="width:100%;" >
-                                    <img style="height:200px;" src="./assets/<?php if($sportif['photo'] == null){echo "img/fondBlanc.png";}else{echo "image/".$sportif['baniere'];} ?>" class="img-responsive" alt="">
+                                    <img style="height:200px;" src="./assets/<?php if($sportif['baniere'] == null){echo "img/fondBlanc.png";}else{echo "image/".$sportif['baniere'];} ?>" class="img-responsive" alt="">
                                     <img src="./assets/<?php if($sportif['photo'] == null){echo "img/profileIcon.png";}else{echo "image/".$sportif['photo'];} ?>" class="photo" alt="">
                                     <h5 class="spacer1 size2 bold"><?php if($sportif['nom'] == null && $sportif['prenom'] == null){echo $sportif['email'];}else{echo $sportif['prenom']. " " .$sportif['nom']; }?></h5>
                                     <p class="spacebottom2 halfwhite desc"><?=PosteModel::selectPosteById($sportif['idPoste'])['poste']?>
@@ -222,7 +222,7 @@ use drafteam\Models\TypeModel;
                 
                     if(isset($_SESSION['photoProfil']) !=""){
                     ?>
-                        <img id="ppUtil" class="photoProfil " src="./assets/image/<?=$_SESSION['photoProfil']?>">
+                        <img id="ppUtil" class="photoProfil" src="./assets/image/<?=$_SESSION['photoProfil']?>">
                     <?php
                     }else{
                     ?>

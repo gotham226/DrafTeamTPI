@@ -99,10 +99,12 @@
             <br><br>
         <?php
         }
+        if(isset($_SESSION['entraineur']))
+        {
         ?>
-        
             <h1 style=" margin-top:1%;" class="spacebottom3 halfwhite size2 ta-center">Mes championnats </h1>
         <?php
+        }
         foreach ($championnats as $championnat)
         {
             $idChampionnat = $championnat['idChampionnat'];

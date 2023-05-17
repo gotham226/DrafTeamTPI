@@ -76,9 +76,9 @@ use drafteam\Models\PosteModel;
                 ?>
                     <div class="container spacer5 ta-center bg-purple" style=" margin: 0%;background-image: url('./assets/<?php if($joueur['baniere'] == null){echo "img/fondBlanc.png";}else{echo "image/".$joueur['baniere'];} ?>'); width: 100%; background-size: cover;">
                     
-                        <ul style="display: inline-flex; list-style: none; width:100%;">
-                            <li style="width:40%; margin-top: 1%;"><img style="width:50%; height :100%;" class="photoProfil " src="./assets/<?php if($joueur['photo'] == null){echo "img/profileIcon.png";}else{echo "image/".$joueur['photo'];} ?>"></li>
-                            <li style="width:45%; margin-left: 0%; margin-top: 2%; margin-right:12%;"><h4  style="font-size: 120%;text-align: center; color:black; border-radius: 8px; background-color:white; width:100%; height:95%;;"><?php if($joueur['prenom'] == null){echo $joueur['email'];}else{echo $joueur['prenom']."<br>".$joueur['nom']; }?><br><?php echo PosteModel::selectPosteById($joueur['idPoste'])['poste'];?></h4></li>
+                        <ul style="display: inline-flex; list-style: none; width:100%;height:100%;">
+                            <li style="width:40%; margin-top: 2%;"><img style="width:75%; height :96%;" class="photoProfil " src="./assets/<?php if($joueur['photo'] == null){echo "img/profileIcon.png";}else{echo "image/".$joueur['photo'];} ?>"></li>
+                            <li style="width:55%; margin-left: 10%; margin-top: 2%; margin-right:5%;"><h4  style="font-size: 120%;text-align: center; color:black; border-radius: 8px; background-color:white; width:100%; height:95%;;"><?php if($joueur['prenom'] == null){echo $joueur['email'];}else{echo $joueur['prenom']."<br>".$joueur['nom']; }?><br><?php echo PosteModel::selectPosteById($joueur['idPoste'])['poste'];?></h4></li>
                             <?php
                             if(isset($_SESSION['entraineur']) == true)
                             {
